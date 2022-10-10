@@ -1,0 +1,227 @@
+{
+	"name": "OF",
+	"version": "0.11.3",
+	"externalDependencies": {
+		"glfw": {
+		   "repository": "https://github.com/glfw/glfw"
+		},
+		"assimp": {
+			"repository": "https://github.com/assimp/assimp",
+			"tag" : "v5.2.5"
+		 }
+	 },	
+
+	// "abstracts:*": {
+	// 	"language": "C++",
+	// 	"settings:Cxx": {
+	// 		"cppStandard": "c++17",
+	// 		"runtimeTypeInformation": false,
+	// 		"includeDirs": [
+	// 			"../libs/glm/include",
+	// 			"../libs/glfw/include",
+	// 			"../libs/glew/include",
+	// 			"../libs/tess2/include",
+	// 			"../libs/utf8/include",
+	// 			"../libs/Freeimage/include",
+	// 			"../libs/cairo/include/cairo",
+	// 			"../libs/curl/include",
+	// 			"../libs/fmod/include",
+	// 			"../libs/freetype/include",
+	// 			"../libs/json/include",
+	// 			"../libs/pugixml/include",
+	// 			"../libs/rtAudio/include",
+	// 			"../libs/uriparser/include"
+	// 		],
+
+	// 		"macosFrameworks": [
+	// 			"Accelerate",
+	// 			"AGL",
+	// 			"ApplicationServices",
+	// 			"AVFoundation",
+	// 			"Cocoa",
+	// 			"CoreAudio",
+	// 			"CoreFoundation",
+	// 			"CoreMedia",
+	// 			"CoreServices",
+	// 			"CoreVideo",
+	// 			"IOKit",
+	// 			"OpenGL",
+	// 			"QuartzCore",
+	// 			"Security"
+	// 		]
+	// 	}
+	// 	// ,
+	// 	// "files": "../libs/openFrameworks/**.{cpp,mm}"
+	// },	 
+	"targets": {
+		"objc-lib": {
+			"language": "Objective-C++",
+			"kind": "sharedLibrary",
+			"files": "../libs/openFrameworks/**.mm",
+			"condition": "[:macos]",
+			"settings:Cxx": {
+				"compileOptions": [
+					"-fpascal-strings",
+					"-fobjc-arc",
+					"-stdlib=libc++",
+					"-std=c++11"
+				],
+				"runtimeTypeInformation": true,
+
+				"includeDirs": [
+					"../libs/glm/include",
+					"../libs/glfw/include",
+					"../libs/glew/include",
+					"../libs/tess2/include",
+					"../libs/utf8/include",
+					"../libs/Freeimage/include",
+					"../libs/cairo/include/cairo",
+					"../libs/curl/include",
+					"../libs/fmod/include",
+					"../libs/freetype/include",
+					"../libs/json/include",
+					"../libs/pugixml/include",
+					"../libs/rtAudio/include",
+					"../libs/uriparser/include",
+					"../libs/openFrameworks",
+					"../libs/openFrameworks/3d",
+					"../libs/openFrameworks/app",
+					"../libs/openFrameworks/communication",
+					"../libs/openFrameworks/events",
+					"../libs/openFrameworks/gl",
+					"../libs/openFrameworks/graphics",
+					"../libs/openFrameworks/math",
+					"../libs/openFrameworks/sound",
+					"../libs/openFrameworks/types",
+					"../libs/openFrameworks/utils",
+					"../libs/openFrameworks/video"
+				],
+
+				"exceptions": true
+			}
+		}
+		// ,
+
+		// "core": {
+		// 	"kind": "sharedLibrary",
+		// 	"language": "C++",
+		// 	"condition": "[:macos]",
+
+		// 	"settings:Cxx": {
+		// 		"cppStandard": "c++17",
+		// 		"runtimeTypeInformation": true,
+		// 		"warningsPreset": "minimal",
+		// 		"threads": true,
+		// 		"exceptions": true,
+		// 		"compileOptions": [
+		// 			"-fpascal-strings",
+		// 			"-fobjc-arc",
+		// 			"-lobjc",
+		// 			"-lc++"
+		// 		],
+		// 		"macosFrameworks": [
+		// 			"Accelerate",
+		// 			"AGL",
+		// 			"ApplicationServices",
+		// 			"AVFoundation",
+		// 			"Cocoa",
+		// 			"CoreAudio",
+		// 			"CoreFoundation",
+		// 			"CoreMedia",
+		// 			"CoreServices",
+		// 			"CoreVideo",
+		// 			"IOKit",
+		// 			"OpenGL",
+		// 			"QuartzCore",
+		// 			"Security"
+		// 		],
+		// 		// "libDirs": [
+		// 		// ],
+		// 		"includeDirs": [
+		// 			"../libs/glm/include",
+		// 			"../libs/glfw/include",
+		// 			"../libs/glew/include",
+		// 			"../libs/tess2/include",
+		// 			"../libs/utf8/include",
+		// 			"../libs/Freeimage/include",
+		// 			"../libs/cairo/include/cairo",
+		// 			"../libs/curl/include",
+		// 			"../libs/fmod/include",
+		// 			"../libs/freetype/include",
+		// 			"../libs/json/include",
+		// 			"../libs/pugixml/include",
+		// 			"../libs/rtAudio/include",
+		// 			"../libs/uriparser/include"
+		// 			// ,
+
+		// 			// "../libs/openFrameworks",
+		// 			// "../libs/openFrameworks/3d",
+		// 			// "../libs/openFrameworks/app",
+		// 			// "../libs/openFrameworks/communication",
+		// 			// "../libs/openFrameworks/events",
+		// 			// "../libs/openFrameworks/gl",
+		// 			// "../libs/openFrameworks/graphics",
+		// 			// "../libs/openFrameworks/math",
+		// 			// "../libs/openFrameworks/sound",
+		// 			// "../libs/openFrameworks/types",
+		// 			// "../libs/openFrameworks/utils",
+		// 			// "../libs/openFrameworks/video"
+		// 		]
+		// 	},
+
+		// 	"files": {
+
+		// 		"include": [ 
+		// 			"../libs/openFrameworks/**" 
+		// 			// ,
+		// 			// "../libs/openFrameworks",
+		// 			// "../libs/openFrameworks/3d",
+		// 			// "../libs/openFrameworks/app",
+		// 			// "../libs/openFrameworks/communication",
+		// 			// "../libs/openFrameworks/events",
+		// 			// "../libs/openFrameworks/gl",
+		// 			// "../libs/openFrameworks/graphics",
+		// 			// "../libs/openFrameworks/math",
+		// 			// "../libs/openFrameworks/sound",
+		// 			// "../libs/openFrameworks/types",
+		// 			// "../libs/openFrameworks/utils"
+		// 			// ,
+		// 			// "../libs/openFrameworks/video"
+				
+		// 		],
+
+		// 		"exclude": [
+		// 			// "../libs/openFrameworks/video/2"	
+		// 			"../libs/openFrameworks/video/ofGstUtils.*",
+		// 			"../libs/openFrameworks/video/ofAVFoundationVideoPlayer.*",
+		// 			"../libs/openFrameworks/video/ofGstVideoPlayer.*"
+
+		// 			// "../libs/openFrameworks/video/{ofGstVideoPlayer,ofGstVideoGrabber,ofGstUtils,ofDirectShowGrabber,ofDirectShowPlayer}.*"
+		// 		]	
+		// 	 }
+		// },
+
+		,
+
+		"app" : {
+			"kind": "executable",
+			"language": "C++",
+			"settings:Cxx": {
+				"cppStandard": "c++17",
+				"runtimeTypeInformation": true,
+				"warningsPreset": "minimal"
+				// ,
+				// "links[:macos]": "my-static-lib"
+			},
+
+			
+		// 	"files": "../examples/3d/3DPrimitivesExample/src/**"
+		// }
+	}
+	// "distribution": {
+	// 	"all": {
+	// 		"kind": "bundle",
+	// 		"buildTargets": "*"
+	// 	}
+	// }
+}
