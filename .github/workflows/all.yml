@@ -1,0 +1,21 @@
+name: ChaletTest
+
+on: [push, pull_request]
+
+jobs:
+  build_version:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        # os: [ubuntu-latest] , windows-latest
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Get Chalet
+        uses: dimitre/get-chalet@v2
+      - name: Is this love?
+        shell: bash
+        run: |
+          ./chalet/build/**/chalet build
