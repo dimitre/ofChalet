@@ -18,4 +18,4 @@ jobs:
       - name: Is this love?
         shell: bash
         run: |
-          ./chalet/build/**/chalet build
+          ./chalet/build/**/chalet build ~/
