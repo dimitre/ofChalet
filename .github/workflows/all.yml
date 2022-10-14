@@ -13,9 +13,21 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-      - name: Get Chalet
-        uses: dimitre/get-chalet@v2
+
+    - name: Cache chalet
+      id: cache-chalet
+      uses: actions/cache@v3
+      env:
+        cache-name: cache-chalet
+      with:
+        path: chalet
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('chalet/*.md') }}
+        restore-keys: |
+          ${{ runner.os }}-build-${{ env.cache-name }}-
+      - if: ${{ steps.cache-libs.outputs.cache-hit != 'true' }}
+          name: Get Chalet
+          uses: dimitre/get-chalet@v2
       - name: Is this love?
         shell: bash
         run: |
-          ./chalet/build/**/chalet build ~/
+          ./chalet/build/**/chalet build
