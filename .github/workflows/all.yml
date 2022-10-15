@@ -26,6 +26,11 @@ jobs:
     - name: Get Chalet
       if: ${{ steps.cache-libs.outputs.cache-hit != 'true' }}
       uses: dimitre/get-chalet@v2
+    - name: Chalet Version
+      shell: bash
+      run: |
+        ./chalet/build/**/chalet --version
+
     - name: Is this love?
       shell: bash
       run: |
