@@ -20,7 +20,7 @@ jobs:
       env:
         cache-name: cache-chalet
       with:
-        path: chalet
+        path: chalet/**
         key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('chalet/*.md') }}
         restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}-
     - name: Get Chalet
@@ -29,9 +29,9 @@ jobs:
     - name: Chalet Version
       shell: bash
       run: |
-        ./chalet/build/**/chalet --version
+        chalet/build/**/chalet --version
 
     - name: Is this love?
       shell: bash
       run: |
-        ./chalet/build/**/chalet build
+        chalet/build/**/chalet build
