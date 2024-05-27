@@ -12,7 +12,24 @@
 			"repository": "https://github.com/glfw/glfw",
 			"tag" : "3.4",
 			"kind" : "git"
+		},
+		"cairo": {
+			"repository" : "https://gitlab.freedesktop.org/cairo/cairo",
+			"tag" : "1.18.0",
+			"kind" : "git"
+		},
+		"curl": {
+			"repository" : "https://github.com/curl/curl/",
+			"tag" : "curl-8_8_0",
+			"kind" : "git"
+		},
+
+		"freetype": {
+			"repository" : "https://gitlab.freedesktop.org/freetype/freetype",
+			"tag" : "VER-2-13-2",
+			"kind": "git"
 		}
+
 
 		// "glm": {
 		// 	"repository" : "https://github.com/g-truc/glm",
@@ -40,7 +57,7 @@
 				"CMAKE_OSX_DEPLOYMENT_TARGET=10.9",
 				// "CMAKE_C_FLAGS=-arch arm64 -arch x86_64 -O3 -DNDEBUG -funroll-loops -Werror",
 				"CMAKE_C_FLAGS=-fPIC",
-				"CMAKE_CXX_FLAGS=-arch arm64 -arch x86_64 -stdlib=libc++ -O3 -DNDEBUG -funroll-loops -std=c++11 -Werror"
+				"CMAKE_CXX_FLAGS=-arch arm64 -arch x86_64 -O3 -DNDEBUG -funroll-loops -std=c++11 -Werror"
 			],
 			// "defaultRunArguments": [
 			// 	"BUILD_SHARED_LIBS=OFF",
@@ -68,6 +85,22 @@
                 "CMAKE_C_FLAGS=-arch arm64 -arch x86_64"
 			]
 		}
+		,
+
+		"freetype" : {
+			"kind": "cmakeProject",
+			"location": "${external:freetype}",
+			"recheck": false,
+			"rebuild": false,
+			"defines" : [
+				"CMAKE_C_FLAGS=-arch arm64 -arch x86_64 -stdlib=libc++ -mmacosx-version-min=10.9"
+			]
+		}
+
+		// "curl" : {
+		// 	"kind": "process",
+		// 	"file" : "make",
+		// }
 		// ,
 
 		// "glm": {
@@ -126,28 +159,17 @@
 
 	,
 	"distribution": {
-		// "libs" : {
+
+
+		// "assimp": {
 		// 	"kind": "archive",
 		// 	"condition": "[:macos]",
 		// 	"format": "zip",
 		// 	"include": [
-		// 		"${externalBuild:glfw}/**.a",
-		// 		"${external:glfw}/include",
 		// 		"${externalBuild:assimp}/lib",
 		// 		"${external:assimp}/include"
 		// 	]
-		// }
-
-
-		"assimp": {
-			"kind": "archive",
-			"condition": "[:macos]",
-			"format": "zip",
-			"include": [
-				"${externalBuild:assimp}/lib",
-				"${external:assimp}/include"
-			]
-		},
+		// },
 
 		"glfw": {
 			"kind": "archive",
@@ -158,6 +180,17 @@
 				"${external:glfw}/include"
 			]
 		}
+		// ,
+
+		// "freetype": {
+		// 	"kind": "archive",
+		// 	"condition": "[:macos]",
+		// 	"format": "zip",
+		// 	"include": [
+		// 		"${externalBuild:freetype}/*.a"
+		// 		// "${external:freetype}/include"
+		// 	]
+		// }
 
 		
 		// ,
@@ -193,5 +226,18 @@
 		// 		"${external:glew}/include"
 		// 	]
 		// }
+
+				// "libs" : {
+		// 	"kind": "archive",
+		// 	"condition": "[:macos]",
+		// 	"format": "zip",
+		// 	"include": [
+		// 		"${externalBuild:glfw}/**.a",
+		// 		"${external:glfw}/include",
+		// 		"${externalBuild:assimp}/lib",
+		// 		"${external:assimp}/include"
+		// 	]
+		// }
+
 	}
 }

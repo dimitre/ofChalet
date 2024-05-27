@@ -37,7 +37,7 @@
 			"disassembler": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/otool",
 			"cmake": "/opt/homebrew/bin/cmake",
 			"make": "/Applications/Xcode.app/Contents/Developer/usr/bin/make",
-			"ninja": ""
+			"ninja": "/opt/homebrew/bin/ninja"
 		}
 	},
 	"tools": {
