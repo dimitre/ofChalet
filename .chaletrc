@@ -1,12 +1,13 @@
 {
 	"options": {
 		"dumpAssembly": false,
-		"showCommands": true,
+		"showCommands": false,
 		"benchmark": true,
 		"launchProfiler": true,
 		"keepGoing": false,
-		"generateCompileCommands": false,
-		"maxJobs": 8,
+		"generateCompileCommands": true,
+		"onlyRequired": false,
+		"maxJobs": 12,
 		"toolchain": "apple-llvm",
 		"configuration": "Release",
 		"architecture": "auto",
@@ -16,42 +17,27 @@
 		"outputDir": "build",
 		"externalDir": "chalet_external",
 		"distributionDir": "dist",
+		"osTargetName": "macosx",
+		"osTargetVersion": "14.5",
 		"signingIdentity": "",
-		"runTarget": "app",
-		"runArguments": {
-			"app": ""
-		}
+		"lastTarget": "all",
+		"runArguments": {}
 	},
 	"toolchains": {
 		"apple-llvm": {
-			"version": "14.0.0",
-			"strategy": "native-experimental",
+			"version": "15.0.0",
+			"strategy": "native",
 			"buildPathStyle": "target-triple",
 			"compilerCpp": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++",
 			"compilerC": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang",
-			"compilerWindowsResource": "/opt/homebrew/opt/llvm/bin/llvm-rc",
+			"compilerWindowsResource": "",
 			"linker": "/Applications/Xcode.app/Contents/Developer/usr/bin/ld",
 			"archiver": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool",
 			"profiler": "",
 			"disassembler": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/otool",
 			"cmake": "/opt/homebrew/bin/cmake",
 			"make": "/Applications/Xcode.app/Contents/Developer/usr/bin/make",
-			"ninja": "/opt/homebrew/bin/ninja"
-		},
-		"llvm": {
-			"version": "15.0.1",
-			"strategy": "ninja",
-			"buildPathStyle": "target-triple",
-			"compilerCpp": "/opt/homebrew/opt/llvm/bin/clang++",
-			"compilerC": "/opt/homebrew/opt/llvm/bin/clang",
-			"compilerWindowsResource": "/opt/homebrew/opt/llvm/bin/llvm-rc",
-			"linker": "/opt/homebrew/opt/llvm/bin/lld",
-			"archiver": "/opt/homebrew/opt/llvm/bin/llvm-ar",
-			"profiler": "",
-			"disassembler": "/opt/homebrew/opt/llvm/bin/llvm-objdump",
-			"cmake": "/opt/homebrew/bin/cmake",
-			"make": "/Applications/Xcode.app/Contents/Developer/usr/bin/make",
-			"ninja": "/opt/homebrew/bin/ninja"
+			"ninja": ""
 		}
 	},
 	"tools": {
@@ -75,12 +61,14 @@
 		"zip": "/usr/bin/zip"
 	},
 	"appleSdks": {
-		"appletvos": "/Applications/Xcode.app/Contents/Developer/Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS16.0.sdk",
-		"appletvsimulator": "/Applications/Xcode.app/Contents/Developer/Platforms/AppleTVSimulator.platform/Developer/SDKs/AppleTVSimulator16.0.sdk",
-		"macosx": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk",
-		"watchos": "/Applications/Xcode.app/Contents/Developer/Platforms/WatchOS.platform/Developer/SDKs/WatchOS9.0.sdk",
-		"watchsimulator": "/Applications/Xcode.app/Contents/Developer/Platforms/WatchSimulator.platform/Developer/SDKs/WatchSimulator9.0.sdk",
-		"iphoneos": "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS16.0.sdk",
-		"iphonesimulator": "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator16.0.sdk"
+		"macosx": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk",
+		"iphoneos": "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS17.5.sdk",
+		"iphonesimulator": "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator17.5.sdk",
+		"watchos": "/Applications/Xcode.app/Contents/Developer/Platforms/WatchOS.platform/Developer/SDKs/WatchOS10.5.sdk",
+		"watchsimulator": "/Applications/Xcode.app/Contents/Developer/Platforms/WatchSimulator.platform/Developer/SDKs/WatchSimulator10.5.sdk",
+		"appletvos": "/Applications/Xcode.app/Contents/Developer/Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS17.5.sdk",
+		"appletvsimulator": "/Applications/Xcode.app/Contents/Developer/Platforms/AppleTVSimulator.platform/Developer/SDKs/AppleTVSimulator17.5.sdk",
+		"xros": "/Applications/Xcode.app/Contents/Developer/Platforms/XROS.platform/Developer/SDKs/XROS1.2.sdk",
+		"xrsimulator": "/Applications/Xcode.app/Contents/Developer/Platforms/XRSimulator.platform/Developer/SDKs/XRSimulator1.2.sdk"
 	}
 }

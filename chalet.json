@@ -1,41 +1,31 @@
 {
-	"name": "OF",
-	"version": "0.11.3",
+	"name": "libsof",
+	"version": "0.1.2",
 	"externalDependencies": {
 		"assimp": {
 			"repository": "https://github.com/assimp/assimp",
-			"tag" : "v5.2.5"
-		},
-		"glfw": {
-		   "repository": "https://github.com/glfw/glfw",
-		   "tag" : "3.3.8"
-		},
-
-		"poco": {
-			"repository" : "https://github.com/pocoproject/poco",
-			"tag" : "poco-1.12.2-release"
+			"tag" : "v5.4.1",
+			"kind" : "git"
 		}
 		,
-		"glm": {
-			"repository" : "https://github.com/g-truc/glm"
- 		}
-		,
-		"glew": {
-			"repository" : "https://github.com/nigels-com/glew",
-			"tag" : "glew-2.2.0"
- 		}
-		//  "": {
-		// 	"repository" : "",
-		// 	"tag" : ""
- 		// },
-		//  "": {
-		// 	"repository" : "",
-		// 	"tag" : ""
- 		// },
-		//  "": {
-		// 	"repository" : "",
-		// 	"tag" : ""
- 		// },
+		"glfw": {
+			"repository": "https://github.com/glfw/glfw",
+			"tag" : "3.4",
+			"kind" : "git"
+		}
+
+		// "glm": {
+		// 	"repository" : "https://github.com/g-truc/glm",
+		// 	"tag" : "1.0.1",
+		// 	"kind" : "git"
+ 		// }
+		// ,
+
+		//  "glew": {
+		// 	"repository" : "https://github.com/nigels-com/glew",
+		// 	"kind" : "git",
+		// 	"tag" : "glew-2.2.0"
+ 		// }
 	},
 
 	"targets" : {
@@ -45,7 +35,12 @@
 				"BUILD_SHARED_LIBS=OFF",
 				"ASSIMP_BUILD_TESTS=0",
 				"ASSIMP_BUILD_SAMPLES=0",
-				"ASSIMP_BUILD_3MF_IMPORTER=0"
+				"ASSIMP_BUILD_3MF_IMPORTER=0",
+				"CMAKE_COMPILE_WARNING_AS_ERROR=0",
+				"CMAKE_OSX_DEPLOYMENT_TARGET=10.9",
+				// "CMAKE_C_FLAGS=-arch arm64 -arch x86_64 -O3 -DNDEBUG -funroll-loops -Werror",
+				"CMAKE_C_FLAGS=-fPIC",
+				"CMAKE_CXX_FLAGS=-arch arm64 -arch x86_64 -stdlib=libc++ -O3 -DNDEBUG -funroll-loops -std=c++11 -Werror"
 			],
 			// "defaultRunArguments": [
 			// 	"BUILD_SHARED_LIBS=OFF",
@@ -56,14 +51,44 @@
 			"location": "${external:assimp}",
 			"recheck": false,
 			"rebuild": false
+		},
+
+		"glfw": {
+			"kind": "cmakeProject",
+			"location": "${external:glfw}",
+			"recheck": false,
+			"rebuild": false,
+			"defines" : [
+				"GLFW_BUILD_DOCS=OFF",
+				"GLFW_BUILD_TESTS=OFF",
+				"GLFW_BUILD_EXAMPLES=OFF",
+				"BUILD_SHARED_LIBS=OFF",
+				"CMAKE_BUILD_TYPE=Release",
+                "CMAKE_OSX_DEPLOYMENT_TARGET=10.9",
+                "CMAKE_C_FLAGS=-arch arm64 -arch x86_64"
+			]
 		}
-		// , 
-		// "glfw": {
-		// 	"kind": "cmakeProject",
-		// 	"location": "${external:glfw}",
+		// ,
+
+		// "glm": {
+		// 	"kind": "script",
+		// 	"location": "${external:glm}",
 		// 	"recheck": false,
 		// 	"rebuild": false
-		// },
+		// }
+		
+		// ,
+
+		// "glew": {
+		// 	"kind": "cmakeProject",
+		// 	// "location": "${external:glew}",
+		// 	"location": "${external:glew}/build/cmake",
+		// 	"recheck": false,
+		// 	"rebuild": false
+		// }
+		
+		// ,
+
 		// "poco": {
 		// 	"kind": "cmakeProject",
 		// 	"location": "${external:poco}",
@@ -78,26 +103,95 @@
 		// 	"rebuild": false
 		// }
 		// ,
-		// "glew": {
-		// 	"kind": "cmakeProject",
-		// 	"location": "${external:glew}/build/cmake",
-		// 	"recheck": false,
-		// 	"rebuild": false
+		// "glewpre": {
+		// 	"kind": "script",
+		// 	"file": "${external:glew}/cmake-testbuild.sh"
 		// }
-	}
-	,
+		// ,
 
+
+		
+	}
+
+
+	// "distribution": {
+	// 	"modules-project": {
+	// 		"kind": "bundle",
+	// 		"buildTargets": [
+	// 			"assimp"
+	// 		]
+	// 	}
+	// }	
+	// ,
+
+	,
 	"distribution": {
-		"ofApo": {
+		// "libs" : {
+		// 	"kind": "archive",
+		// 	"condition": "[:macos]",
+		// 	"format": "zip",
+		// 	"include": [
+		// 		"${externalBuild:glfw}/**.a",
+		// 		"${external:glfw}/include",
+		// 		"${externalBuild:assimp}/lib",
+		// 		"${external:assimp}/include"
+		// 	]
+		// }
+
+
+		"assimp": {
 			"kind": "archive",
 			"condition": "[:macos]",
-			"format": "zip"
-			,
+			"format": "zip",
 			"include": [
-				// "*"
-				"../${external:assimp}/**"
-			// 	"${externalBuild:assimp}"
+				"${externalBuild:assimp}/lib",
+				"${external:assimp}/include"
+			]
+		},
+
+		"glfw": {
+			"kind": "archive",
+			"condition": "[:macos]",
+			"format": "zip",
+			"include": [
+				"${externalBuild:glfw}/src/*.a",
+				"${external:glfw}/include"
 			]
 		}
+
+		
+		// ,
+
+		// "glm": {
+		// 	"kind": "archive",
+		// 	"condition": "[:macos]",
+		// 	"format": "zip",
+		// 	"include": [
+		// 		"${externalBuild:glm}/lib",
+		// 		"${external:glm}/*.md"
+		// 	]
+		// }
+		
+		// ,
+
+		// "poco": {
+		// 	"kind": "archive",
+		// 	"condition": "[:macos]",
+		// 	"format": "zip",
+		// 	"include": [
+		// 		"${externalBuild:poco}/lib",
+		// 		"${external:poco}/include"
+		// 	]
+		// },
+
+		// "glew": {
+		// 	"kind": "archive",
+		// 	"condition": "[:macos]",
+		// 	"format": "zip",
+		// 	"include": [
+		// 		"${externalBuild:glew}/build/cmake/lib",
+		// 		"${external:glew}/include"
+		// 	]
+		// }
 	}
 }

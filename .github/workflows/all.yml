@@ -14,24 +14,21 @@ jobs:
 
     steps:
 
-    - name: Cache chalet
-      id: cache-chalet
-      uses: actions/cache@v3
-      env:
-        cache-name: cache-chalet
-      with:
-        path: chalet/**
-        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('chalet/*.md') }}
-        restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}-
-    - name: Get Chalet
-      if: ${{ steps.cache-libs.outputs.cache-hit != 'true' }}
-      uses: dimitre/get-chalet@v2
-    - name: Chalet Version
+    - name: Install Chalet
       shell: bash
-      run: |
-        chalet/build/**/chalet --version
+      run: brew install --cask https://www.chalet-work.space/api/brew/latest/chalet.rb
 
-    - name: Is this love?
+    - name: Chalet Bundle
       shell: bash
       run: |
-        chalet/build/**/chalet build
+        chalet bundle
+
+    - name: "Upload assets"
+      uses: softprops/action-gh-release@v2.0.5
+      with:
+        files: ./dist/*.zip
+        token: ${{ secrets.GITHUB_TOKEN }}
+        # token: ${{ secrets.pat }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        draft: true
+        prerelease: false
