@@ -4,7 +4,7 @@
 	"externalDependencies": {
 		"assimp": {
 			"repository": "https://github.com/assimp/assimp",
-			"tag" : "v5.4.1",
+			"tag" : "v5.4.3",
 			"kind" : "git"
 		}
 		,
@@ -12,21 +12,30 @@
 			"repository": "https://github.com/glfw/glfw",
 			"tag" : "3.4",
 			"kind" : "git"
-		},
-		"cairo": {
-			"repository" : "https://gitlab.freedesktop.org/cairo/cairo",
-			"tag" : "1.18.0",
-			"kind" : "git"
-		},
-		"curl": {
-			"repository" : "https://github.com/curl/curl/",
-			"tag" : "curl-8_8_0",
-			"kind" : "git"
-		},
+		}
+		,
+		// "cairo": {
+		// 	"repository" : "https://gitlab.freedesktop.org/cairo/cairo",
+		// 	"tag" : "1.18.2",
+		// 	"kind" : "git"
+		// }
+		// ,
+		// "curl": {
+		// 	"repository" : "https://github.com/curl/curl/",
+		// 	"tag" : "curl-8_10_1",
+		// 	"kind" : "git"
+		// },
 
 		"freetype": {
 			"repository" : "https://gitlab.freedesktop.org/freetype/freetype",
-			"tag" : "VER-2-13-2",
+			"tag" : "VER-2-13-3",
+			"kind": "git"
+		}
+		,
+
+		"libpng": {
+			"repository" : "https://github.com/pnggroup/libpng",
+			"tag" : "v1.6.44",
 			"kind": "git"
 		}
 
@@ -36,13 +45,14 @@
 		// 	"tag" : "1.0.1",
 		// 	"kind" : "git"
  		// }
-		// ,
+		,
 
-		//  "glew": {
-		// 	"repository" : "https://github.com/nigels-com/glew",
-		// 	"kind" : "git",
-		// 	"tag" : "glew-2.2.0"
- 		// }
+		"glew": {
+			"repository" : "https://github.com/Perlmint/glew-cmake",
+			// "repository" : "https://github.com/nigels-com/glew",
+			// "tag" : "glew-2.2.0",
+			"kind" : "git"
+ 		}
 	},
 
 	"targets" : {
@@ -55,21 +65,15 @@
 				"ASSIMP_BUILD_3MF_IMPORTER=0",
 				"CMAKE_COMPILE_WARNING_AS_ERROR=0",
 				"CMAKE_OSX_DEPLOYMENT_TARGET=10.9",
-				// "CMAKE_C_FLAGS=-arch arm64 -arch x86_64 -O3 -DNDEBUG -funroll-loops -Werror",
-				"CMAKE_C_FLAGS=-fPIC",
-				"CMAKE_CXX_FLAGS=-arch arm64 -arch x86_64 -O3 -DNDEBUG -funroll-loops -std=c++11 -Werror"
+				"CMAKE_OSX_ARCHITECTURES=x86_64;arm64",
+				"CMAKE_C_FLAGS=-O3 -DNDEBUG -funroll-loops -Werror -fPIC"
 			],
-			// "defaultRunArguments": [
-			// 	"BUILD_SHARED_LIBS=OFF",
-			// 	"ASSIMP_BUILD_TESTS=0",
-			// 	"ASSIMP_BUILD_SAMPLES=0",
-			// 	"ASSIMP_BUILD_3MF_IMPORTER=0"
-			// ],
+
 			"location": "${external:assimp}",
 			"recheck": false,
 			"rebuild": false
-		},
-
+		}
+		,
 		"glfw": {
 			"kind": "cmakeProject",
 			"location": "${external:glfw}",
@@ -81,8 +85,8 @@
 				"GLFW_BUILD_EXAMPLES=OFF",
 				"BUILD_SHARED_LIBS=OFF",
 				"CMAKE_BUILD_TYPE=Release",
-                "CMAKE_OSX_DEPLOYMENT_TARGET=10.9",
-                "CMAKE_C_FLAGS=-arch arm64 -arch x86_64"
+				"CMAKE_OSX_ARCHITECTURES=x86_64;arm64",
+                "CMAKE_OSX_DEPLOYMENT_TARGET=10.9"
 			]
 		}
 		,
@@ -93,7 +97,29 @@
 			"recheck": false,
 			"rebuild": false,
 			"defines" : [
-				"CMAKE_C_FLAGS=-arch arm64 -arch x86_64 -stdlib=libc++ -mmacosx-version-min=10.9"
+				"CMAKE_OSX_ARCHITECTURES=x86_64;arm64",
+                "CMAKE_OSX_DEPLOYMENT_TARGET=10.9"
+				// ,
+				// "CMAKE_C_FLAGS=-stdlib=libc++ -mmacosx-version-min=10.9"
+			]
+		}
+		,
+
+		"libpng" : {
+			"kind": "cmakeProject",
+			"location": "${external:libpng}",
+			"recheck": false,
+			"rebuild": false,
+			"defines" : [
+				// temporary fix for neon issues in universal
+				// we can remove once this is fixed: https://github.com/pnggroup/libpng/issues/372
+				// option(PNG_DEBUG "Enable debug output" OFF)
+// option(PNG_HARDWARE_OPTIMIZATIONS "Enable hardware optimizations" ON)
+				// "PNG_ARM_NEON=OFF",
+				// "PNG_HARDWARE_OPTIMIZATIONS=OFF", 
+				"CMAKE_C_FLAGS=\"-DPNG_ARM_NEON_OPT=0\"",
+				"CMAKE_OSX_ARCHITECTURES=x86_64;arm64",
+				"CMAKE_OSX_DEPLOYMENT_TARGET=10.9"
 			]
 		}
 
@@ -110,15 +136,19 @@
 		// 	"rebuild": false
 		// }
 		
-		// ,
+		,
 
-		// "glew": {
-		// 	"kind": "cmakeProject",
-		// 	// "location": "${external:glew}",
-		// 	"location": "${external:glew}/build/cmake",
-		// 	"recheck": false,
-		// 	"rebuild": false
-		// }
+		"glew": {
+			"kind": "cmakeProject",
+			"location": "${external:glew}",
+			// "location": "${external:glew}/build/cmake",
+			"recheck": false,
+			"rebuild": false,
+			"defines" : [
+				"CMAKE_OSX_ARCHITECTURES=x86_64;arm64",
+				"CMAKE_OSX_DEPLOYMENT_TARGET=10.9"
+			]
+		}
 		
 		// ,
 
@@ -159,17 +189,16 @@
 
 	,
 	"distribution": {
-
-
-		// "assimp": {
-		// 	"kind": "archive",
-		// 	"condition": "[:macos]",
-		// 	"format": "zip",
-		// 	"include": [
-		// 		"${externalBuild:assimp}/lib",
-		// 		"${external:assimp}/include"
-		// 	]
-		// },
+		"assimp": {
+			"kind": "archive",
+			"condition": "[:macos]",
+			"format": "zip",
+			"include": [
+				"${externalBuild:assimp}/lib",
+				"${external:assimp}/include"
+			]
+		}
+		,
 
 		"glfw": {
 			"kind": "archive",
@@ -180,18 +209,28 @@
 				"${external:glfw}/include"
 			]
 		}
-		// ,
+		,
 
-		// "freetype": {
-		// 	"kind": "archive",
-		// 	"condition": "[:macos]",
-		// 	"format": "zip",
-		// 	"include": [
-		// 		"${externalBuild:freetype}/*.a"
-		// 		// "${external:freetype}/include"
-		// 	]
-		// }
+		"freetype": {
+			"kind": "archive",
+			"condition": "[:macos]",
+			"format": "zip",
+			"include": [
+				"${externalBuild:freetype}/*.a",
+				"${external:freetype}/include"
+			]
+		}
 
+		,
+		"libpng": {
+			"kind": "archive",
+			"condition": "[:macos]",
+			"format": "zip",
+			"include": [
+				"${external:libpng}/*.h",
+				"${externalBuild:libpng}/*.a"
+			]
+		}
 		
 		// ,
 
