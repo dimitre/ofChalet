@@ -171,10 +171,10 @@
 		// }
 		// ,
 
-		"cairo" : {
-			"kind": "process",
-			"file" : "make",
-		}
+		// "cairo" : {
+		// 	"kind": "process",
+		// 	"file" : "make",
+		// }
 		// ,
 
 
