@@ -131,7 +131,7 @@
 			"recheck": false,
 			"rebuild": false,
 			"defines" : [
-				"BUILD_SHARED=OFF",
+				"glew-cmake_BUILD_SHARED=OFF",
 				"CMAKE_OSX_ARCHITECTURES=x86_64;arm64",
 				"CMAKE_OSX_DEPLOYMENT_TARGET=10.9"
 			]
@@ -232,7 +232,11 @@
 			"condition": "[:macos]",
 			"format": "zip",
 			"include": [
-				"${externalBuild:freetype}*.a",
+				// "${externalBuild:freetype}/libfreetype.a"
+				"${externalBuild:freetype}/*.a"
+				// "${externalBuild:freetype}/${ar:glm_static}"
+				
+				,
 				"${external:freetype}/include"
 			]
 		}
@@ -243,6 +247,8 @@
 			"format": "zip",
 			"include": [
 				"${externalBuild:libpng}/*.a",
+				// "${externalBuild:libpng}/${ar:glm_static}",
+
 				"${external:libpng}/*.h"
 			]
 		}
