@@ -18,20 +18,31 @@ jobs:
 
     - name: Install Chalet
       shell: bash
-      run: brew install --cask https://www.chalet-work.space/api/brew/latest/chalet.rb
+      # run: brew install --cask https://www.chalet-work.space/api/brew/latest/chalet.rb
+      run: brew install --cask ./chalet.rb
 
     - name: Chalet Bundle
       shell: bash
       run: |
         chalet bundle
 
-    - name: "Upload assets"
-      uses: softprops/action-gh-release@v2.0.5
+    - name: Release
+      uses: softprops/action-gh-release@v2.0.8
       with:
         files: ./dist/*.zip
         token: ${{ secrets.GITHUB_TOKEN }}
         # token: ${{ secrets.pat }}
         # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        name: testing
-        draft: true
-        prerelease: false
+        draft: false
+        prerelease: false        
+
+    # - name: "Upload assets"
+    #   uses: softprops/action-gh-release@v2.0.5
+    #   with:
+    #     files: ./dist/*.zip
+    #     token: ${{ secrets.GITHUB_TOKEN }}
+    #     # token: ${{ secrets.pat }}
+    #     # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #     name: testing
+    #     draft: true
+    #     prerelease: false
