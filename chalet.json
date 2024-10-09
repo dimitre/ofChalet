@@ -14,12 +14,13 @@
 			"kind" : "git"
 		}
 		,
-		// "cairo": {
-		// 	"repository" : "https://gitlab.freedesktop.org/cairo/cairo",
-		// 	"tag" : "1.18.2",
-		// 	"kind" : "git"
-		// }
-		// ,
+		"cairo": {
+			"repository" : "https://gitlab.freedesktop.org/cairo/cairo",
+			"tag" : "1.18.2",
+			"kind" : "git"
+		}
+		,
+
 		// "curl": {
 		// 	"repository" : "https://github.com/curl/curl/",
 		// 	"tag" : "curl-8_10_1",
@@ -39,12 +40,12 @@
 			"kind": "git"
 		}
 
-
-		// "glm": {
-		// 	"repository" : "https://github.com/g-truc/glm",
-		// 	"tag" : "1.0.1",
-		// 	"kind" : "git"
- 		// }
+		,
+		"glm": {
+			"repository" : "https://github.com/g-truc/glm",
+			"tag" : "1.0.1",
+			"kind" : "git"
+ 		}
 		,
 
 		"glew": {
@@ -122,6 +123,47 @@
 				"CMAKE_OSX_DEPLOYMENT_TARGET=10.9"
 			]
 		}
+		,
+
+		"glew": {
+			"kind": "cmakeProject",
+			"location": "${external:glew}",
+			"recheck": false,
+			"rebuild": false,
+			"defines" : [
+				"BUILD_SHARED=OFF",
+				"CMAKE_OSX_ARCHITECTURES=x86_64;arm64",
+				"CMAKE_OSX_DEPLOYMENT_TARGET=10.9"
+			]
+		}
+		,
+
+
+		"glm": {
+			"kind": "cmakeProject",
+			"location": "${external:glm}",
+			"recheck": false,
+			"rebuild": false,
+			"defines" : [
+				"GLM_ENABLE_FAST_MATH=ON",
+				"GLM_ENABLE_SIMD_SSE2=ON",
+				"GLM_ENABLE_SIMD_SSE3=ON",
+				"GLM_ENABLE_SIMD_SSSE3=ON",
+				"GLM_ENABLE_SIMD_SSE4_1=ON",
+				"GLM_ENABLE_SIMD_SSE4_2=ON",
+				"GLM_ENABLE_SIMD_AVX=ON",
+				"GLM_ENABLE_SIMD_AVX2=ON",
+				"GLM_TEST_ENABLE_SIMD_NEON=ON",
+				"GLM_TEST_ENABLE=OFF",
+				"GLM_ENABLE_CXX_17=ON",
+				// "CMAKE_COMPILE_WARNING_AS_ERROR=OFF",
+				// "CMAKE_CXX_FLAGS=\"-Wall\"",
+				"CMAKE_OSX_ARCHITECTURES=x86_64;arm64",
+				"CMAKE_OSX_DEPLOYMENT_TARGET=10.9"
+
+			]
+		}
+
 
 		// "curl" : {
 		// 	"kind": "process",
@@ -129,47 +171,10 @@
 		// }
 		// ,
 
-		// "glm": {
-		// 	"kind": "script",
-		// 	"location": "${external:glm}",
-		// 	"recheck": false,
-		// 	"rebuild": false
-		// }
-		
-		,
-
-		"glew": {
-			"kind": "cmakeProject",
-			"location": "${external:glew}",
-			// "location": "${external:glew}/build/cmake",
-			"recheck": false,
-			"rebuild": false,
-			"defines" : [
-				"CMAKE_OSX_ARCHITECTURES=x86_64;arm64",
-				"CMAKE_OSX_DEPLOYMENT_TARGET=10.9"
-			]
+		"cairo" : {
+			"kind": "process",
+			"file" : "make",
 		}
-		
-		// ,
-
-		// "poco": {
-		// 	"kind": "cmakeProject",
-		// 	"location": "${external:poco}",
-		// 	"recheck": false,
-		// 	"rebuild": false
-		// }
-		// ,
-		// "glm": {
-		// 	"kind": "cmakeProject",
-		// 	"location": "${external:glm}",
-		// 	"recheck": false,
-		// 	"rebuild": false
-		// }
-		// ,
-		// "glewpre": {
-		// 	"kind": "script",
-		// 	"file": "${external:glew}/cmake-testbuild.sh"
-		// }
 		// ,
 
 
@@ -187,6 +192,16 @@
 	// }	
 	// ,
 
+	// ,
+	// "package": {
+	// 	"glm": {
+	// 		"settings:Cxx": {
+	// 			"includeDirs": "${external:glm}"
+	// 			// ,
+	// 			// "staticLinks": "${externalBuild:glm}/glm/${ar:glm_static}"
+	// 		}
+	// 	}	
+	// }
 	,
 	"distribution": {
 		"assimp": {
@@ -220,7 +235,6 @@
 				"${external:freetype}/include"
 			]
 		}
-
 		,
 		"libpng": {
 			"kind": "archive",
@@ -231,7 +245,26 @@
 				"${externalBuild:libpng}/*.a"
 			]
 		}
-		
+		,
+		"glew": {
+			"kind": "archive",
+			"condition": "[:macos]",
+			"format": "zip",
+			"include": [
+				"${external:glew}/include",
+				"${externalBuild:glew}/lib/*.a"
+			]
+		}
+		, 
+		"glm": {
+			"kind": "archive",
+			"condition": "[:macos]",
+			"format": "zip"
+			// ,	
+			// "importPackages": [
+			// 	"glm.static"
+			// ]
+		}
 		// ,
 
 		// "glm": {
@@ -246,25 +279,9 @@
 		
 		// ,
 
-		// "poco": {
-		// 	"kind": "archive",
-		// 	"condition": "[:macos]",
-		// 	"format": "zip",
-		// 	"include": [
-		// 		"${externalBuild:poco}/lib",
-		// 		"${external:poco}/include"
-		// 	]
-		// },
 
-		// "glew": {
-		// 	"kind": "archive",
-		// 	"condition": "[:macos]",
-		// 	"format": "zip",
-		// 	"include": [
-		// 		"${externalBuild:glew}/build/cmake/lib",
-		// 		"${external:glew}/include"
-		// 	]
-		// }
+
+
 
 				// "libs" : {
 		// 	"kind": "archive",
