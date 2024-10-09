@@ -21,6 +21,15 @@ jobs:
       # run: brew install --cask https://www.chalet-work.space/api/brew/latest/chalet.rb
       run: brew install --cask ./chalet.rb
 
+    - name: Cache Chalet
+      id: cache-chalet
+      uses: actions/cache@v4
+      with:
+        path: |
+          chalet_external
+          build
+        key: ${ matrix.os }-chaletcache
+
     - name: Chalet Bundle
       shell: bash
       run: |
