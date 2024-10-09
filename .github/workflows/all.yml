@@ -19,7 +19,9 @@ jobs:
     - name: Install Chalet
       shell: bash
       # run: brew install --cask https://www.chalet-work.space/api/brew/latest/chalet.rb
-      run: brew install --cask ./chalet.rb
+      run: |
+        brew install ninja
+        brew install --cask ./chalet.rb
 
     - name: Cache Chalet
       id: cache-chalet
