@@ -232,7 +232,7 @@
 			"condition": "[:macos]",
 			"format": "zip",
 			"include": [
-				// "${externalBuild:freetype}*.a",
+				"${externalBuild:freetype}*.a",
 				"${external:freetype}/include"
 			]
 		}
@@ -242,7 +242,7 @@
 			"condition": "[:macos]",
 			"format": "zip",
 			"include": [
-				// "${externalBuild:libpng}/*.a",
+				"${externalBuild:libpng}/*.a",
 				"${external:libpng}/*.h"
 			]
 		}
@@ -252,7 +252,7 @@
 			"condition": "[:macos]",
 			"format": "zip",
 			"include": [
-				// "${externalBuild:glew}/lib/*.a",
+				"${externalBuild:glew}/lib/*.a",
 				"${external:glew}/include"
 			]
 		}
@@ -260,7 +260,11 @@
 		"glm": {
 			"kind": "archive",
 			"condition": "[:macos]",
-			"format": "zip"
+			"format": "zip",
+			"include": [
+				"${externalBuild:glm}/**.a",
+				"${external:glm}/glm"
+			]
 			// ,	
 			// "importPackages": [
 			// 	"glm.static"
