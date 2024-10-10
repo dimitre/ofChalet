@@ -100,8 +100,6 @@
 			"defines" : [
 				"CMAKE_OSX_ARCHITECTURES=x86_64;arm64",
                 "CMAKE_OSX_DEPLOYMENT_TARGET=10.9"
-				// ,
-				// "CMAKE_C_FLAGS=-stdlib=libc++ -mmacosx-version-min=10.9"
 			]
 		}
 		,
@@ -233,9 +231,8 @@
 			"format": "zip",
 			"include": [
 				// "${externalBuild:freetype}/libfreetype.a"
-				"${externalBuild:freetype}/*.a"
 				// "${externalBuild:freetype}/${ar:glm_static}"
-				
+				"${externalBuild:freetype}/${ar:freetype}"
 				,
 				"${external:freetype}/include"
 			]
@@ -246,9 +243,10 @@
 			"condition": "[:macos]",
 			"format": "zip",
 			"include": [
-				"${externalBuild:libpng}/*.a",
+				"${buildDir}/${ar:libpng}"
+				,
+				// "${externalBuild:libpng}/*.a",
 				// "${externalBuild:libpng}/${ar:glm_static}",
-
 				"${external:libpng}/*.h"
 			]
 		}
@@ -258,7 +256,9 @@
 			"condition": "[:macos]",
 			"format": "zip",
 			"include": [
-				"${externalBuild:glew}/lib/*.a",
+				// "${externalBuild:glew}/lib/*.a",
+				"${externalBuild:glew}/${ar:glew}",
+
 				"${external:glew}/include"
 			]
 		}
@@ -268,7 +268,8 @@
 			"condition": "[:macos]",
 			"format": "zip",
 			"include": [
-				"${externalBuild:glm}/**.a",
+				"${externalBuild:glm}/${ar:glm}",
+				// "${externalBuild:glm}/**.a",
 				"${external:glm}/glm"
 			]
 			// ,	
