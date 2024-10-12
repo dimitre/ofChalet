@@ -105,16 +105,7 @@
 
 		"curl": {
 			"kind": "cmakeProject",
-			// "libDirs": [
-			// 	"${external:openssl}/lib"
-			// ],
 			"defines": [
-				// "BUILD_SHARED_LIBS=OFF",
-				// "ASSIMP_BUILD_TESTS=0",
-				// "ASSIMP_BUILD_SAMPLES=0",
-				// "ASSIMP_BUILD_3MF_IMPORTER=0",
-				// "CMAKE_COMPILE_WARNING_AS_ERROR=0",
-				// "CMAKE_C_FLAGS=-O3 -DNDEBUG -funroll-loops -Werror -fPIC",
 				"CMAKE_OSX_DEPLOYMENT_TARGET=10.9",
 				// "CMAKE_OSX_ARCHITECTURES=x86_64;arm64"
 				"CMAKE_OSX_ARCHITECTURES=arm64"

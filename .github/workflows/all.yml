@@ -15,15 +15,18 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+    - name: Install Ninja
+      shell: bash
+      run: brew install ninja
 
     - name: Install Chalet
       shell: bash
       # run: brew install --cask https://www.chalet-work.space/api/brew/latest/chalet.rb
       run: |
-        brew install ninja
         brew tap chalet-org/chalet
         # brew install --cask chalet
         brew install --cask chalet@dev
+        chalet --version
 
     - name: Cache Chalet
       id: cache-chalet

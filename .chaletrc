@@ -21,7 +21,8 @@
 		"osTargetVersion": "14.5",
 		"signingIdentity": "",
 		"lastTarget": "all",
-		"runArguments": {}
+		"runArguments": {},
+		"compilerCache": false
 	},
 	"toolchains": {
 		"apple-llvm": {
@@ -58,7 +59,11 @@
 		"tiffutil": "/usr/bin/tiffutil",
 		"xcodebuild": "/Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild",
 		"xcrun": "/usr/bin/xcrun",
-		"zip": "/usr/bin/zip"
+		"zip": "/usr/bin/zip",
+		"ccache": "/opt/homebrew/bin/ccache",
+		"curl": "/usr/bin/curl",
+		"openssl": "/opt/homebrew/bin/openssl",
+		"unzip": "/usr/bin/unzip"
 	},
 	"appleSdks": {
 		"macosx": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.0.sdk",
