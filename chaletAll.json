@@ -82,6 +82,15 @@
 		}
 	},
 
+	// "abstracts": {
+	// 	"cmakeDef": {
+	// 		"defines[platform:macos]" : [
+	// 			"CMAKE_OSX_DEPLOYMENT_TARGET=10.9",
+	// 			"CMAKE_OSX_ARCHITECTURES=x86_64;arm64"
+	// 		]
+	// 	},
+	// },
+
 	"targets": {
 		"opencv": {
 			"kind": "cmakeProject",
@@ -191,11 +200,12 @@
 				
 				"CPU_BASELINE=NATIVE",
 				"CMAKE_CXX_FLAGS=-fvisibility-inlines-hidden -stdlib=libc++ -std=c++11 -O3 -fPIC -Wno-implicit-function-declaration",
-				"CMAKE_C_FLAGS=-fvisibility-inlines-hidden -stdlib=libc++ -O3 -fPIC -Wno-implicit-function-declaration",
-
+				"CMAKE_C_FLAGS=-fvisibility-inlines-hidden -stdlib=libc++ -O3 -fPIC -Wno-implicit-function-declaration"
+			],
+			"defines[platform:macos]" : [
 				"CMAKE_OSX_DEPLOYMENT_TARGET=10.9",
 				"CMAKE_OSX_ARCHITECTURES=x86_64;arm64"
-			],
+			]
 			"location": "${external:${name}}"
 		},
 		"assimp": {
@@ -210,10 +220,13 @@
 				"ASSIMP_BUILD_3MF_IMPORTER=NO",
 				"ASSIMP_INJECT_DEBUG_POSTFIX=OFF",
 				// "CMAKE_COMPILE_WARNING_AS_ERROR=NO",
-				"CMAKE_OSX_DEPLOYMENT_TARGET=10.9",
-				"CMAKE_OSX_ARCHITECTURES=x86_64;arm64",
 				"CMAKE_C_FLAGS=-O3 -DNDEBUG -funroll-loops -Werror -fPIC"
 			],
+			"defines[platform:macos]": [
+				"CMAKE_OSX_DEPLOYMENT_TARGET=10.9",
+				"CMAKE_OSX_ARCHITECTURES=x86_64;arm64"
+			]
+
 
 			"location": "${external:${name}}",
 			"recheck": false,
@@ -238,12 +251,12 @@
 
 		"curl": {
 			"kind": "cmakeProject",
-			"defines": [
-				// "CMAKE_OSX_ARCHITECTURES=x86_64;arm64"
-				"CMAKE_OSX_ARCHITECTURES=x86_64;arm64",
-				"CMAKE_OSX_DEPLOYMENT_TARGET=10.9"
+			// "defines": [
+			// ],
+			"defines[platform:macos]" : [
+				"CMAKE_OSX_DEPLOYMENT_TARGET=10.9",
+				"CMAKE_OSX_ARCHITECTURES=x86_64;arm64"
 			],
-
 			"location": "${external:${name}}",
 			"recheck": false,
 			"rebuild": false
@@ -252,7 +265,7 @@
 
 		"glfw": {
 			"kind": "cmakeProject",
-			"location": "${external:glfw}",
+			"location": "${external:${name}}",
 			"recheck": false,
 			"rebuild": false,
 			"defines" : [
@@ -261,9 +274,10 @@
 				"GLFW_BUILD_EXAMPLES=OFF",
 				"BUILD_SHARED_LIBS=OFF",
 				"CMAKE_BUILD_TYPE=Release",
-
-				"CMAKE_OSX_ARCHITECTURES=x86_64;arm64",
-                "CMAKE_OSX_DEPLOYMENT_TARGET=10.9"
+			],
+			"defines[platform:macos]" : [
+				"CMAKE_OSX_DEPLOYMENT_TARGET=10.9",
+				"CMAKE_OSX_ARCHITECTURES=x86_64;arm64"
 			]
 		},
 
@@ -272,9 +286,11 @@
 			"location": "${external:${name}}",
 			"recheck": false,
 			"rebuild": false,
-			"defines" : [
-				"CMAKE_OSX_ARCHITECTURES=x86_64;arm64",
-                "CMAKE_OSX_DEPLOYMENT_TARGET=10.9"
+			// "defines" : [
+			// ], 
+			"defines[platform:macos]" : [
+				"CMAKE_OSX_DEPLOYMENT_TARGET=10.9",
+				"CMAKE_OSX_ARCHITECTURES=x86_64;arm64"
 			]
 		},
 
@@ -287,15 +303,17 @@
 				// temporary fix for neon issues in universal
 				// we can remove once this is fixed: https://github.com/pnggroup/libpng/issues/372
 				"CMAKE_C_FLAGS=\"-DPNG_ARM_NEON_OPT=0\"",
-
-				"CMAKE_OSX_ARCHITECTURES=x86_64;arm64",
-				"CMAKE_OSX_DEPLOYMENT_TARGET=10.9"
+			],
+			"defines[platform:macos]" : [
+				"CMAKE_OSX_DEPLOYMENT_TARGET=10.9",
+				"CMAKE_OSX_ARCHITECTURES=x86_64;arm64"
 			]
 		},
 
 		"freeimage": {
 			// "extends": "cmake_default",
 			"kind": "cmakeProject",
+			"location": "${external:${name}}",
 			"defines": [
 				"BUILD_JXR=OFF",
 				"BUILD_LIBPNG=OFF",
@@ -335,7 +353,10 @@
 				// -GXcode \
 
 			],
-			"location": "${external:${name}}"
+			"defines[platform:macos]" : [
+				"CMAKE_OSX_DEPLOYMENT_TARGET=10.9",
+				"CMAKE_OSX_ARCHITECTURES=x86_64;arm64"
+			]
 		},
 
 		"glew": {
@@ -345,11 +366,12 @@
 			"rebuild": false,
 			"defines" : [
 				"glew-cmake_BUILD_SHARED=OFF",
-				"CMAKE_OSX_ARCHITECTURES=x86_64;arm64",
-				"CMAKE_OSX_DEPLOYMENT_TARGET=10.9"
+			],
+			"defines[platform:macos]" : [
+				"CMAKE_OSX_DEPLOYMENT_TARGET=10.9",
+				"CMAKE_OSX_ARCHITECTURES=x86_64;arm64"
 			]
-		}
-		,
+		},
 
 		"glm": {
 			"kind": "cmakeProject",
@@ -368,8 +390,10 @@
 				"GLM_TEST_ENABLE_SIMD_NEON=ON",
 				"GLM_TEST_ENABLE=OFF",
 				"GLM_ENABLE_CXX_17=ON",
-				"CMAKE_OSX_ARCHITECTURES=x86_64;arm64",
-				"CMAKE_OSX_DEPLOYMENT_TARGET=10.9"
+			],
+			"defines[platform:macos]" : [
+				"CMAKE_OSX_DEPLOYMENT_TARGET=10.9",
+				"CMAKE_OSX_ARCHITECTURES=x86_64;arm64"
 			]
 		},
 
@@ -382,10 +406,13 @@
 				"FMT_SYSTEM_HEADERS=OFF",
 				"CMAKE_INSTALL_INCLUDEDIR=include",
 				"CMAKE_INCLUDE_OUTPUT_DIRECTORY=include",
-				"CMAKE_OSX_DEPLOYMENT_TARGET=10.9",
-				"CMAKE_OSX_ARCHITECTURES=x86_64;arm64",
 				"CMAKE_C_FLAGS=-O3 -DNDEBUG -funroll-loops -Werror -fPIC"
 			],
+
+			"defines[platform:macos]" : [
+				"CMAKE_OSX_DEPLOYMENT_TARGET=10.9",
+				"CMAKE_OSX_ARCHITECTURES=x86_64;arm64"
+			]
 			"location": "${external:${name}}",
 			"recheck": false,
 			"rebuild": false
@@ -453,17 +480,16 @@
 			]
 		},
 
-		// "glfw": {
-		// 	"kind": "archive",
-		// 	"condition": "[:macos]",
-		// 	"format": "zip",
-		// 	"include": [
-		// 		// "${externalBuild:${name}}/src/*.a",
-		// 		"${externalBuild:${name}}**.a",
-		// 		"${external:${name}}/include"
-		// 	]
-		// }
-		// ,
+		"glfw": {
+			"kind": "archive",
+			"condition": "[:macos]",
+			"format": "zip",
+			"include": [
+				// "${externalBuild:${name}}/src/*.a",
+				"${externalBuild:${name}}**.a",
+				"${external:${name}}/include"
+			]
+		}
 
 		"freetype": {
 			"kind": "archive",

@@ -6,10 +6,17 @@ Libraries
 - [ ] cairo
 - [ ] curl
 - [ ] fmod
-- [ ] fmt
+- [x] fmt
+brew info fmt
+open /opt/homebrew/Cellar/fmt/11.0.2
+brew --cellar fmt
+/opt/homebrew/Cellar/fmt
+mkdir dist
+ls $(brew --cellar fmt)
+cp $(brew --cellar fmt)/**/*.a dist
 - [x] freetype
 - [x] glew
-- [ ] glfw
+- [x] glfw
 - [x] glm
 - [ ] json
 - [x] libpng
