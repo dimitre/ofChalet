@@ -7,12 +7,12 @@ Libraries
 - [ ] curl
 - [ ] fmod
 - [ ] fmt
-- [ ] freetype
-- [ ] glew
+- [x] freetype
+- [x] glew
 - [ ] glfw
-- [ ] glm
+- [x] glm
 - [ ] json
-- [ ] libpng
+- [x] libpng
 - [ ] openssl
 - [ ] pixman
 - [ ] pugixml
@@ -21,3 +21,9 @@ Libraries
 - [ ] uriparser
 - [ ] utf8
 - [ ] zlib
+
+- [x] opencv
+- [ ] libusb
+- [x] assimp
+- [ ] libxml2
+- [ ] svgtiny
