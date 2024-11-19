@@ -38,11 +38,11 @@
 			"kind" : "git"
 		},
 
-		"curl": {
-			"repository" : "https://github.com/curl/curl/",
-			"tag" : "curl-8_10_1",
-			"kind" : "git"
-		},
+		// "curl": {
+		// 	"repository" : "https://github.com/curl/curl/",
+		// 	"tag" : "curl-8_10_1",
+		// 	"kind" : "git"
+		// },
 
 		"freetype": {
 			"repository" : "https://gitlab.freedesktop.org/freetype/freetype",
@@ -255,18 +255,18 @@
 		// 	"rebuild": false
 		// },
 
-		"curl": {
-			"kind": "cmakeProject",
-			"location": "${external:${name}}",
-			"recheck": false,
-			"rebuild": false,
-			// "defines": [
-			// ],
-			"defines[platform:macos]" : [
-				"CMAKE_OSX_DEPLOYMENT_TARGET=10.9",
-				"CMAKE_OSX_ARCHITECTURES=x86_64;arm64"
-			]
-		},
+		// "curl": {
+		// 	"kind": "cmakeProject",
+		// 	"location": "${external:${name}}",
+		// 	"recheck": false,
+		// 	"rebuild": false,
+		// 	// "defines": [
+		// 	// ],
+		// 	"defines[platform:macos]" : [
+		// 		"CMAKE_OSX_DEPLOYMENT_TARGET=10.9",
+		// 		"CMAKE_OSX_ARCHITECTURES=x86_64;arm64"
+		// 	]
+		// },
 
 
 		"glfw": {
