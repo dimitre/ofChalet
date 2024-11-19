@@ -60,7 +60,7 @@
 			"repository" : "https://github.com/libusb/libusb-cmake",
 			"tag" : "v1.0.27-1",
 			"kind" : "git"
-		}
+		},
 
 		"freeimage": {
 			"repository" : "https://github.com/danoli3/FreeImage",
@@ -513,7 +513,7 @@
 				"${externalBuild:${name}}**.a",
 				"${external:${name}}/include"
 			]
-		}
+		},
 
 		"freetype": {
 			"kind": "archive",
