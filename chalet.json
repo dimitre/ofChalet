@@ -100,6 +100,9 @@
 	"targets": {
 		"opencv": {
 			"kind": "cmakeProject",
+			"location": "${external:${name}}",
+			"recheck": false,
+			"rebuild": false,
 			"defines": [
 				"APPLE_FRAMEWORK=ON",
 				"ANDROID_EXAMPLES_WITH_LIBS=OFF",
@@ -212,10 +215,12 @@
 				"CMAKE_OSX_DEPLOYMENT_TARGET=10.9",
 				"CMAKE_OSX_ARCHITECTURES=x86_64;arm64"
 			]
-			"location": "${external:${name}}"
 		},
 		"assimp": {
 			"kind": "cmakeProject",
+			"location": "${external:${name}}",
+			"recheck": false,
+			"rebuild": false,
 			"defines": [
 				// "ASSIMP_BUILD_FRAMEWORK=ON",
 				"ASSIMP_NO_EXPORT=YES",
@@ -232,11 +237,6 @@
 				"CMAKE_OSX_DEPLOYMENT_TARGET=10.9",
 				"CMAKE_OSX_ARCHITECTURES=x86_64;arm64"
 			]
-
-
-			"location": "${external:${name}}",
-			"recheck": false,
-			"rebuild": false
 		},
 
 
@@ -257,15 +257,15 @@
 
 		"curl": {
 			"kind": "cmakeProject",
+			"location": "${external:${name}}",
+			"recheck": false,
+			"rebuild": false,
 			// "defines": [
 			// ],
 			"defines[platform:macos]" : [
 				"CMAKE_OSX_DEPLOYMENT_TARGET=10.9",
 				"CMAKE_OSX_ARCHITECTURES=x86_64;arm64"
-			],
-			"location": "${external:${name}}",
-			"recheck": false,
-			"rebuild": false
+			]
 		},
 
 
@@ -279,7 +279,7 @@
 				"GLFW_BUILD_TESTS=OFF",
 				"GLFW_BUILD_EXAMPLES=OFF",
 				"BUILD_SHARED_LIBS=OFF",
-				"CMAKE_BUILD_TYPE=Release",
+				"CMAKE_BUILD_TYPE=Release"
 			],
 			"defines[platform:macos]" : [
 				"CMAKE_OSX_DEPLOYMENT_TARGET=10.9",
@@ -336,6 +336,8 @@
 			// "extends": "cmake_default",
 			"kind": "cmakeProject",
 			"location": "${external:${name}}",
+			"recheck": false,
+			"rebuild": false,
 			"defines": [
 				"BUILD_JXR=OFF",
 				"BUILD_LIBPNG=OFF",
@@ -387,7 +389,7 @@
 			"recheck": false,
 			"rebuild": false,
 			"defines" : [
-				"glew-cmake_BUILD_SHARED=OFF",
+				"glew-cmake_BUILD_SHARED=OFF"
 			],
 			"defines[platform:macos]" : [
 				"CMAKE_OSX_DEPLOYMENT_TARGET=10.9",
@@ -411,7 +413,7 @@
 				"GLM_ENABLE_SIMD_AVX2=ON",
 				"GLM_TEST_ENABLE_SIMD_NEON=ON",
 				"GLM_TEST_ENABLE=OFF",
-				"GLM_ENABLE_CXX_17=ON",
+				"GLM_ENABLE_CXX_17=ON"
 			],
 			"defines[platform:macos]" : [
 				"CMAKE_OSX_DEPLOYMENT_TARGET=10.9",
@@ -421,6 +423,9 @@
 
 		"fmt" : {
 			"kind": "cmakeProject",
+			"location": "${external:${name}}",
+			"recheck": false,
+			"rebuild": false,
 			"defines": [
 				"BUILD_SHARED_LIBS=OFF",
 				"FMT_MASTER_PROJECT=OFF",
@@ -435,9 +440,6 @@
 				"CMAKE_OSX_DEPLOYMENT_TARGET=10.9",
 				"CMAKE_OSX_ARCHITECTURES=x86_64;arm64"
 			]
-			"location": "${external:${name}}",
-			"recheck": false,
-			"rebuild": false
 		}
 
 
@@ -520,8 +522,7 @@
 			"include": [
 				// "${externalBuild:${name}}/libfreetype.a"
 				// "${externalBuild:${name}}/${ar:glm_static}"
-				"${externalBuild:${name}}/${ar:freetype}"
-				,
+				"${externalBuild:${name}}/${ar:freetype}",
 				"${external:${name}}/include"
 			]
 		}
@@ -531,8 +532,7 @@
 			"condition": "[:macos]",
 			"format": "zip",
 			"include": [
-				"${buildDir}/${ar:libpng}"
-				,
+				"${buildDir}/${ar:libpng}",
 				// "${externalBuild:${name}}/*.a",
 				// "${externalBuild:${name}}/${ar:glm_static}",
 				"${external:${name}}/*.h"
@@ -556,7 +556,6 @@
 			"include": [
 				// "${externalBuild:${name}}/lib/*.a",
 				"${externalBuild:${name}}/${ar:glew}",
-
 				"${external:${name}}/include"
 			]
 		}
