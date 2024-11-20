@@ -22,7 +22,8 @@ jobs:
     - name: ccache
       uses: hendrikmuhs/ccache-action@v1.2.14
       with:
-        key: ${{ matrix.os }}-ccache
+        # key: ${{ matrix.os }}-ccache
+        key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('*.json') }}
 
     - name: Install Ninja
       shell: bash
@@ -45,7 +46,9 @@ jobs:
           ./build/**
           # chalet_external
           # build
-        key: ${ matrix.os }-chaletcache
+        # key: ${ matrix.os }-chaletcache
+        key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('*.json') }}
+
 
     # - name: Cache projectGenerator folder
     #   uses: actions/cache@v4
