@@ -36,7 +36,16 @@ jobs:
         brew install --cask chalet@dev
         chalet --version
 
-
+    - name: Cache Chalet
+      id: cache-chalet
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/chalet_external
+          ~/build
+          # chalet_external
+          # build
+        key: ${ matrix.os }-chaletcache
 
     # - name: Cache projectGenerator folder
     #   uses: actions/cache@v4
@@ -49,16 +58,7 @@ jobs:
       run: |
         chalet bundle
 
-    - name: Cache Chalet
-      id: cache-chalet
-      uses: actions/cache@v4
-      with:
-        path: 
-          chalet_external
-          build
-          # chalet_external
-          # build
-        key: ${ matrix.os }-chaletcache
+
 
     - name: LS
       shell: bash
