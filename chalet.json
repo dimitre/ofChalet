@@ -1,6 +1,7 @@
 {
 	"name": "OF altpothecary",
 	"version": "0.0.3",
+
 	"externalDependencies": {
 		"opencv" : {
 			"repository" : "https://github.com/opencv/opencv",
