@@ -2,6 +2,9 @@ name: ChaletTest
 
 on: [push, pull_request]
 
+env: 
+  CMAKE_CXX_COMPILER_LAUNCHER: ccache
+
 jobs:
   build_version:
     strategy:
@@ -15,6 +18,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+
+    - name: ccache
+      uses: hendrikmuhs/ccache-action@v1.2.14
+      with:
+        key: ${{ matrix.os }}-ccache
+
     - name: Install Ninja
       shell: bash
       run: brew install ninja
@@ -32,8 +41,8 @@ jobs:
       uses: actions/cache@v4
       with:
         path: 
-          chalet_external
-          build
+          ofChalet/chalet_external
+          ofChalet/build
           # chalet_external
           # build
         key: ${ matrix.os }-chaletcache
