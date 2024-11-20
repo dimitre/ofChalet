@@ -31,7 +31,7 @@ jobs:
       id: cache-chalet
       uses: actions/cache@v4
       with:
-        path: ['chalet_external/**', 'build/**']
+        path: {chalet_external,build}
           # chalet_external
           # build
         key: ${ matrix.os }-chaletcache
