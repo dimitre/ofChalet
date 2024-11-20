@@ -21,7 +21,6 @@ jobs:
 
     - name: Install Chalet
       shell: bash
-      # run: brew install --cask https://www.chalet-work.space/api/brew/latest/chalet.rb
       run: |
         brew tap chalet-org/chalet
         # brew install --cask chalet
@@ -32,10 +31,16 @@ jobs:
       id: cache-chalet
       uses: actions/cache@v4
       with:
-        path: |
-          chalet_external
-          build
+        path: ['chalet_external/**', 'build/**']
+          # chalet_external
+          # build
         key: ${ matrix.os }-chaletcache
+
+    # - name: Cache projectGenerator folder
+    #   uses: actions/cache@v4
+    #   with:
+    #     path: '~/projectGenerator'
+    #     key: ${{ runner.os }}-pg-${{matrix.cfg.gradle_target}}        
 
     - name: Chalet Bundle
       shell: bash
@@ -47,18 +52,5 @@ jobs:
       with:
         files: ./dist/*.zip
         token: ${{ secrets.GITHUB_TOKEN }}
-        # token: ${{ secrets.pat }}
-        # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         draft: false
         prerelease: false        
-
-    # - name: "Upload assets"
-    #   uses: softprops/action-gh-release@v2.0.5
-    #   with:
-    #     files: ./dist/*.zip
-    #     token: ${{ secrets.GITHUB_TOKEN }}
-    #     # token: ${{ secrets.pat }}
-    #     # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    #     name: testing
-    #     draft: true
-    #     prerelease: false
