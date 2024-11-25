@@ -8,7 +8,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Install Chalet
-        uses: jaxxstorm/action-install-gh-release@v1.10.0
+        uses: jaxxstorm/action-install-gh-release@v1.13.0
         with: # Grab the latest version
           repo: chalet-org/chalet
           cache: enable
