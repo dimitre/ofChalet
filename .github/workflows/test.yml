@@ -1,0 +1,26 @@
+name: Temp
+
+on:
+  workflow_dispatch:
+
+jobs:
+  testingPath:
+    runs-on: windows-latest
+    steps:
+      - name: Install Chalet
+        uses: jaxxstorm/action-install-gh-release@v1.10.0
+        with: # Grab the latest version
+          repo: chalet-org/chalet
+          prerelease: true
+
+      - name: Test Chalet
+        run: |
+          chalet --version
+          
+      - name: Set Path
+        run: |
+          echo "/HolismHolding/Commands" >> $GITHUB_PATH
+      
+      - name: Get Path
+        run: |
+          echo $GITHUB_PATH
