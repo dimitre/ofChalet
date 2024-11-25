@@ -487,7 +487,7 @@
 	"distribution": {
 		"opencv": {
 			"kind": "archive",
-			"condition": "[:macos]",
+			// "condition": "[:macos]",
 			"format": "zip",
 			"include": [
 				"${externalBuild:${name}}/lib",
@@ -497,7 +497,7 @@
 
 		"assimp": {
 			"kind": "archive",
-			"condition": "[:macos]",
+			// "condition": "[:macos]",
 			"format": "zip",
 			"include": [
 				"${externalBuild:${name}}/lib",

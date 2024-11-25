@@ -2,6 +2,9 @@ name: Chalet Multiplatform
 
 on: [push, pull_request]
 
+env: 
+  CMAKE_CXX_COMPILER_LAUNCHER: ccache
+
 jobs:
   build_version:
     strategy:
