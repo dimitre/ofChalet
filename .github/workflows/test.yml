@@ -22,7 +22,7 @@ jobs:
           echo $GITHUB_PATH
 
       - name: LS
-        run: ls -alFR C:\hostedtoolcache\windows\chalet-org\chalet\latest\windows-x64          
+        run: ls C:\hostedtoolcache\windows\chalet-org\chalet\latest\windows-x64          
 
       - name: Test Chalet
         run: |
