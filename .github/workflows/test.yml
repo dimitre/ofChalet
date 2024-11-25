@@ -1,44 +1,74 @@
-name: Temp
+name: Chalet Multiplatform
 
 on: [push, pull_request]
-  # workflow_dispatch:
 
 jobs:
   build_version:
     strategy:
       fail-fast: false
       matrix:
-        # os: [macos-latest]
-        # os: [ubuntu-latest, macos-latest]
         os: [ubuntu-latest, windows-latest, macos-latest] 
 
     runs-on: ${{ matrix.os }}
 
     steps:
+    - name: test
+      shell: bash
+      run: |
+        echo ${{ runner.os }}
+
     - name: Install Chalet
       uses: jaxxstorm/action-install-gh-release@v1.13.0
       with: 
         repo: chalet-org/chalet
         cache: enable
         extension: "\\.zip"
-        # extension-matching: .zip
         prerelease: "true"
-        # prerelease: true
-        # asset-name: chalet-x86_64-pc-windows-msvc
-        # binaries-location: ./chalet
 
     - name: Get Path
       run: |
         echo $GITHUB_PATH
 
-    # - name: LS
-      # run: ls C:\hostedtoolcache\windows\chalet-org\latest\windows-x64
-
-    - name: Test Chalet
+    - name: Chalet Test / Version
       run: |
         chalet --version
-        
-    # - name: Set Path
-      # run: |
-        # echo "/HolismHolding/Commands" >> $GITHUB_PATH
-      
+
+    - uses: actions/checkout@v4
+
+    - name: ccache
+      uses: hendrikmuhs/ccache-action@v1.2.14
+      with:
+        # key: ${{ matrix.os }}-ccache
+        key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('*.json') }}
+
+    - name: Install Ninja
+      uses: seanmiddleditch/gha-setup-ninja@master
+
+
+    - name: Cache Chalet
+      id: cache-chalet
+      uses: actions/cache@v4
+      with:
+        path: |
+          ./chalet_external/**
+          ./build/**
+        # key: ${ matrix.os }-chaletcache
+        key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('*.json') }}
+
+    - name: Chalet Bundle
+      shell: bash
+      run: |
+        chalet bundle
+
+    - name: LS
+      shell: bash
+      run: ls -alR
+
+    - name: Release
+      uses: softprops/action-gh-release@v2.0.8
+      if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
+      with:
+        files: ./dist/*.zip
+        token: ${{ secrets.GITHUB_TOKEN }}
+        draft: false
+        prerelease: false                
