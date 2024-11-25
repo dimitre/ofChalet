@@ -15,7 +15,7 @@ jobs:
           extension: zip
           # prerelease: true
           # asset-name: chalet-x86_64-pc-windows-msvc
-          binaries-location: chalet
+          binaries-location: ./chalet
 
       - name: Test Chalet
         run: |
