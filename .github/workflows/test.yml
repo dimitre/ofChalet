@@ -1,7 +1,7 @@
 name: Temp
 
-on:
-  workflow_dispatch:
+on: [push, pull_request]
+  # workflow_dispatch:
 
 jobs:
   testingPath:
@@ -11,10 +11,11 @@ jobs:
         uses: jaxxstorm/action-install-gh-release@v1.10.0
         with: # Grab the latest version
           repo: chalet-org/chalet
-          prerelease: true
           cache: enable
           extension: zip
-          asset-name: chalet-x86_64-pc-windows-msvc
+          # prerelease: true
+          # asset-name: chalet-x86_64-pc-windows-msvc
+          binaries-location: chalet
 
       - name: Test Chalet
         run: |
