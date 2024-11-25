@@ -12,7 +12,8 @@ jobs:
         with: # Grab the latest version
           repo: chalet-org/chalet
           cache: enable
-          extension: zip
+          extension: .zip
+          extension-matching: .zip
           # prerelease: true
           # asset-name: chalet-x86_64-pc-windows-msvc
           # binaries-location: ./chalet
