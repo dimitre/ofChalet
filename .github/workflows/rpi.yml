@@ -12,16 +12,16 @@ jobs:
     strategy:
       matrix:
         configuration:
-        - { libs: armv6l, multistrap_arch: armhf, suffix: arm-linux-gnueabihf }
-        - { libs: armv7l, multistrap_arch: armhf, suffix: arm-linux-gnueabihf }
-        - { libs: aarch64, multistrap_arch: arm64, suffix: aarch64-linux-gnu }
+        - { libs: armv6l, multistrap_arch: armhf, prefix: arm-linux-gnueabihf }
+        - { libs: armv7l, multistrap_arch: armhf, prefix: arm-linux-gnueabihf }
+        - { libs: aarch64, multistrap_arch: arm64, prefix: aarch64-linux-gnu }
     env:
       CMAKE_SYSTEM_NAME: Linux
       CMAKE_SYSTEM_PROCESSOR: ARM
-      # TOOLCHAIN_PREFIX: ${{matrix.configuration.suffix}}
-      CMAKE_C_COMPILER: gcc-${{matrix.configuration.suffix}}
-      CMAKE_ASM_COMPILER: gcc-${{matrix.configuration.suffix}}
-      CMAKE_CXX_COMPILER: g++-${{matrix.configuration.suffix}}
+      # TOOLCHAIN_PREFIX: ${{matrix.configuration.prefix}}
+      CMAKE_C_COMPILER: ${{matrix.configuration.prefix}}-gcc
+      CMAKE_ASM_COMPILER: ${{matrix.configuration.prefix}}-gcc
+      CMAKE_CXX_COMPILER: ${{matrix.configuration.prefix}}-g++
       CMAKE_SYSROOT: ./raspbian
       MULTISTRAP_ARCH: ${{matrix.configuration.multistrap_arch}}
     steps:
@@ -29,24 +29,22 @@ jobs:
     - name: Cache Packages
       uses: awalsh128/cache-apt-pkgs-action@latest
       with:
-        packages: multistrap unzip gcc-${{matrix.configuration.suffix}} g++-${{matrix.configuration.suffix}}
+        packages: multistrap unzip gcc-${{matrix.configuration.prefix}} g++-${{matrix.configuration.prefix}}
         # version: 1.0
 
 
     - name: Test
       shell: bash
       run: |
-        ${{matrix.configuration.suffix}}-gcc
-        ${{matrix.configuration.suffix}}-g++
-        gcc-${{matrix.configuration.suffix}}
-        g++-${{matrix.configuration.suffix}}
+        ${CMAKE_C_COMPILER} --version
+        ${CMAKE_CXX_COMPILER} --version
 
 
     - uses: actions/checkout@v4
     - name: ccache
       uses: hendrikmuhs/ccache-action@v1.2.14
       with:
-        key: ${{ matrix.configuration.suffix }}
+        key: ${{ matrix.configuration.prefix }}
 
     - name: Install Multistrap
       shell: bash
