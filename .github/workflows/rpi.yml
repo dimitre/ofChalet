@@ -26,29 +26,31 @@ jobs:
       MULTISTRAP_ARCH: ${{matrix.multistrap_arch}}
     steps:
 
+    - name: Cache Packages
+      uses: awalsh128/cache-apt-pkgs-action@latest
+      with:
+        packages: multistrap unzip gcc-${{matrix.configuration.suffix}} g++-${{matrix.configuration.suffix}}
+        # version: 1.0
+
     - name: Install Multistrap
       shell: bash
       run: |
         mkdir -p raspbian/etc/apt/apt.conf.d/
         echo 'Acquire::AllowInsecureRepositories "true";' | sudo tee raspbian/etc/apt/apt.conf.d/90insecure
 
-        if [ ${MULTISTRAP_ARCH} = "armhf" ]; then
+        if [[ ${MULTISTRAP_ARCH} == "armhf" ]]; then
         git clone https://github.com/raspberrypi/userland --depth 1 raspbian/userland
         fi
 
         multistrap -a ${MULTISTRAP_ARCH} -d raspbian -f multistrap.conf   
 
 
-    - name: Cache Packages
-      uses: awalsh128/cache-apt-pkgs-action@latest
-      with:
-        packages: multistrap unzip gcc-${{matrix.configuration.suffix}} g++-${{matrix.configuration.suffix}}
-        # version: 1.0
+
     - uses: actions/checkout@v4
     - name: ccache
       uses: hendrikmuhs/ccache-action@v1.2.14
       with:
-        key: ${{ matrix.cfg.libs }}
+        key: ${{ matrix.configuration.suffix }}
 
     - name: Install Chalet
       uses: jaxxstorm/action-install-gh-release@v1.13.0
