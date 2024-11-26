@@ -27,6 +27,7 @@ jobs:
     steps:
 
     - name: Install Multistrap
+      shell: bash
       run: |
         mkdir -p raspbian/etc/apt/apt.conf.d/
         echo 'Acquire::AllowInsecureRepositories "true";' | sudo tee raspbian/etc/apt/apt.conf.d/90insecure
@@ -58,10 +59,12 @@ jobs:
         prerelease: "true"
 
     - name: Get Path
+      shell: bash
       run: |
         echo $GITHUB_PATH
 
     - name: Chalet Test / Version
+      shell: bash
       run: |
         chalet --version
 
