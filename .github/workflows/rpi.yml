@@ -1,4 +1,4 @@
-name: Chalet Multiplatform
+name: RPI
 
 on: [push, pull_request]
 

@@ -1,4 +1,4 @@
-name: Chalet Multiplatform
+name: Platforms
 
 on: [push, pull_request]
 # on: 
