@@ -335,6 +335,7 @@
 			"defines" : [
 				"BUILD_SHARED_LIBS=OFF",
 				"CMAKE_BUILD_TYPE=Release",
+				"HAVE_LIBUDEV=OFF"
 				"CMAKE_POSITION_INDEPENDENT_CODE=on"
 			],
 			"defines[platform:macos]" : [
