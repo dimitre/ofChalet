@@ -211,6 +211,7 @@
 				// "OBSENSOR_USE_ORBBEC_SDK=NO",
 				// "CMAKE_CXX_FLAGS=-fvisibility-inlines-hidden -O3 -fPIC",
 				// "CMAKE_C_FLAGS=-fvisibility-inlines-hidden -O3 -fPIC"
+				"BUILD_opencv_world=OFF"
 			],
 			"defines[platform:windows]" : [
 				"CPU_BASELINE=\"\"",
