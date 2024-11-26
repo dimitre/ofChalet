@@ -239,7 +239,7 @@
 				"ASSIMP_INSTALL=NO",
 				"ASSIMP_BUILD_3MF_IMPORTER=NO",
 				"ASSIMP_INJECT_DEBUG_POSTFIX=OFF",
-				// "CMAKE_COMPILE_WARNING_AS_ERROR=NO",
+				"CMAKE_COMPILE_WARNING_AS_ERROR=NO"
 				// "CMAKE_C_FLAGS=-O3 -DNDEBUG -funroll-loops -Werror -fPIC"
 			],
 			"defines[platform:macos]": [
