@@ -11,19 +11,19 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        include:
+        configuration:
         - { libs: armv6l, multistrap_arch: armhf, suffix: arm-linux-gnueabihf }
         - { libs: armv7l, multistrap_arch: armhf, suffix: arm-linux-gnueabihf }
         - { libs: aarch64, multistrap_arch: arm64, suffix: aarch64-linux-gnu }
     env:
-      ARCH: ${{matrix.include.libs}}
+      ARCH: ${{matrix.configuration.libs}}
       MULTISTRAP_ARCH: ${{matrix.multistrap_arch}}
       ALLADDONSEXAMPLE: ${{matrix.alladdons}}
     steps:
     - name: Cache Packages
       uses: awalsh128/cache-apt-pkgs-action@latest
       with:
-        packages: multistrap unzip gcc-${{matrix.include.suffix}} g++-${{matrix.include.suffix}}
+        packages: multistrap unzip gcc-${{matrix.configuration.suffix}} g++-${{matrix.configuration.suffix}}
         # version: 1.0
     - uses: actions/checkout@v4
     - name: ccache
