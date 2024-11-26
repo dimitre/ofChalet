@@ -15,10 +15,18 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-    - name: test
+    - name: Cache Packages
+      if: runner.os == 'Linux'
+      uses: awalsh128/cache-apt-pkgs-action@latest
+      with:
+        packages: libwayland-dev libxkbcommon-dev xorg-dev
+        # packages: multistrap unzip gcc-${{matrix.cfg.suffix}} g++-${{matrix.cfg.suffix}}
+        # version: 1.0
+
+    - name: echo runner.os, matrix.os
       shell: bash
       run: |
-        echo ${{ runner.os }}
+        echo ${{ runner.os }} ${{ matrix.os }}
 
     - name: Install Chalet
       uses: jaxxstorm/action-install-gh-release@v1.13.0
