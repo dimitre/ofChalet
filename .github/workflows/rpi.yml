@@ -26,6 +26,15 @@ jobs:
       MULTISTRAP_ARCH: ${{matrix.configuration.multistrap_arch}}
     steps:
 
+    - name: Cache Multistrap
+      id: cache-multistrap
+      uses: actions/cache@v4
+      with:
+        path: |
+          ./raspbian/**
+        key: ${{ runner.os }}-${{ env.cache-id }}
+        #-${{ hashFiles('*.json') }}
+
     - name: Cache Packages
       uses: awalsh128/cache-apt-pkgs-action@latest
       with:
