@@ -61,7 +61,7 @@
 
 		"libpng": {
 			"repository" : "https://github.com/pnggroup/libpng",
-			"tag" : "v1.6.44",
+			// "tag" : "v1.6.44",
 			"kind": "git"
 		},
 
@@ -118,11 +118,11 @@
 				"ZLIB_BUILD_EXAMPLES=OFF",
 				"SKIP_EXAMPLE=ON",
 				// "CMAKE_CXX_EXTENSIONS=OFF",
-				"CMAKE_INSTALL_INCLUDEDIR=include",
-				"CMAKE_INCLUDE_OUTPUT_DIRECTORY=include",
+				// "CMAKE_INSTALL_INCLUDEDIR=include",
+				// "CMAKE_INCLUDE_OUTPUT_DIRECTORY=include",
 				"ENABLE_BITCODE=OFF",
 				"ENABLE_ARC=OFF",
-				"CMAKE_POSITION_INDEPENDENT_CODE=TRUE",
+				// "CMAKE_POSITION_INDEPENDENT_CODE=TRUE",
 				"ENABLE_VISIBILITY=OFF"
 			],
 			"defines[platform:macos]" : [
@@ -356,22 +356,30 @@
 			]
 		},
 
-		// "libpng" : {
-		// 	"kind": "cmakeProject",
-		// 	"location": "${external:${name}}",
-		// 	"recheck": false,
-		// 	"rebuild": false,
-		// 	"defines" : [
-		// 		// temporary fix for neon issues in universal
-		// 		// we can remove once this is fixed: https://github.com/pnggroup/libpng/issues/372
-		// 		"PNG_ARM_NEON_OPT=0"
-		// 		// "CMAKE_C_FLAGS=\"-DPNG_ARM_NEON_OPT=0\""
-		// 	],
-		// 	"defines[platform:macos]" : [
-		// 		"CMAKE_OSX_DEPLOYMENT_TARGET=10.9",
-		// 		"CMAKE_OSX_ARCHITECTURES=x86_64;arm64"
-		// 	]
-		// },
+		"libpng" : {
+			"kind": "cmakeProject",
+			"location": "${external:${name}}",
+			"recheck": false,
+			"rebuild": false,
+			"defines" : [
+				// "ZLIB_ROOT=${externalBuild:zlib}",
+				// "ZLIB_LIBRARY=/Users/d/src/ofChaletApothecary/${externalBuild:zlib}/libz.a",
+				"ZLIB_LIBRARY=../ext.zlib/libz.a",
+				// "ZLIB_INCLUDE_DIRS=${external:zlib}",
+
+				// temporary fix for neon issues in universal
+				// we can remove once this is fixed: https://github.com/pnggroup/libpng/issues/372
+				"CMAKE_C_FLAGS=-DPNG_ARM_NEON_OPT=0",
+				// "PNG_SHARED=OFF",
+				// "PNG_TOOLS=OFF",
+				"PNG_HARDWARE_OPTIMIZATIONS=ON"
+				// "PNG_ARM_NEON_OPT=0"
+			],
+			"defines[platform:macos]" : [
+				"CMAKE_OSX_DEPLOYMENT_TARGET=10.9",
+				"CMAKE_OSX_ARCHITECTURES=x86_64;arm64"
+			]
+		},
 
 		"libusb": {
 			"kind": "cmakeProject",
@@ -403,8 +411,13 @@
 			"rebuild": false,
 			"defines": [
 				"ZLIB_ROOT=${externalBuild:zlib}",
-				"ZLIB_LIBRARY=${externalBuild:zlib}",
+				// "ZLIB_LIBRARY=${externalBuild:zlib}",
+				"ZLIB_LIBRARY=../ext.zlib/libz.a",
 				"ZLIB_INCLUDE_DIRS=${external:zlib}",
+
+				// "PNG_INCLUDE_DIR=${LIBPNG_INCLUDE_DIR}",
+				// "PNG_LIBRARY=${LIBPNG_LIBRARY}",
+				// "PNG_ROOT=${LIBPNG_ROOT}",
 
 				"BUILD_JXR=OFF",
 				"BUILD_LIBPNG=OFF",
@@ -434,12 +447,6 @@
 				"USE_PTHREADS=1"
 
 				// "PLATFORM=$PLATFO",
-				// "PNG_INCLUDE_DIR=${LIBPNG_INCLUDE_DIR}",
-				// "PNG_LIBRARY=${LIBPNG_LIBRARY}",
-				// "PNG_ROOT=${LIBPNG_ROOT}",
-				// "ZLIB_INCLUDE_DIRS=${ZLIB_INCLUDE_DIR}",
-				// "ZLIB_LIBRARY=${ZLIB_LIBRARY}",
-				// "ZLIB_ROOT=${ZLIB_ROOT}",
 				// "CMAKE_TOOLCHAIN_FILE=$APOTHECARY_DIR/toolchains/ios.toolchain.cmake",
 				// -GXcode \
 
