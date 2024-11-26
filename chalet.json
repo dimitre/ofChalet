@@ -442,7 +442,7 @@
 				"FMT_MODULE=OFF",
 				"FMT_SYSTEM_HEADERS=OFF",
 				"CMAKE_INSTALL_INCLUDEDIR=include",
-				"CMAKE_INCLUDE_OUTPUT_DIRECTORY=include",
+				"CMAKE_INCLUDE_OUTPUT_DIRECTORY=include"
 				// "CMAKE_C_FLAGS=-O3 -DNDEBUG -funroll-loops -Werror -fPIC"
 			],
 
