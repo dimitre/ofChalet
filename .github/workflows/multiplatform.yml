@@ -51,8 +51,8 @@ jobs:
     - name: ccache
       uses: hendrikmuhs/ccache-action@v1.2.14
       with:
-        # key: ${{ matrix.os }}-ccache
-        key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('*.json') }}
+        key: ${{ runner.os }}-ccache
+        # key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('*.json') }}
 
     - name: Install Ninja
       uses: seanmiddleditch/gha-setup-ninja@master
@@ -65,8 +65,8 @@ jobs:
         path: |
           ./chalet_external/**
           ./build/**
-        # key: ${ matrix.os }-chaletcache
-        key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('*.json') }}
+        key: ${{ runner.os }}-chaletcache
+        # key: ${{ runner.os }}-${{ hashFiles('./build/**/*.txt') }}
 
     - name: Chalet Bundle
       shell: bash
