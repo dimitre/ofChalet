@@ -352,7 +352,7 @@
 			"defines[platform:linux]" : [
 				"LIBUSB_ENABLE_UDEV=OFF"
 			],
-			
+
 			"defines[platform:macos]" : [
 				"CMAKE_OSX_ARCHITECTURES=x86_64;arm64",
                 "CMAKE_OSX_DEPLOYMENT_TARGET=10.9"
@@ -372,7 +372,7 @@
 				"BUILD_OPENEXR=OFF",
 				"BUILD_SHARED_LIBS=OFF",
 				"BUILD_TESTS=OFF",
-				"BUILD_WEBP=ON",
+				"BUILD_WEBP=OFF",
 				"BUILD_ZLIB=OFF",
 				"CMAKE_BUILD_TYPE=Release",
 				"CMAKE_CXX_EXTENSIONS=OFF",
@@ -391,20 +391,21 @@
 				"ENABLE_ARC=OFF",
 				"ENABLE_BITCODE=OFF",
 				"ENABLE_VISIBILITY=OFF",
-				"PLATFORM=$PLATFO",
+				"USE_PTHREADS=1"
+
+				// "PLATFORM=$PLATFO",
 				// "PNG_INCLUDE_DIR=${LIBPNG_INCLUDE_DIR}",
 				// "PNG_LIBRARY=${LIBPNG_LIBRARY}",
 				// "PNG_ROOT=${LIBPNG_ROOT}",
 				// "ZLIB_INCLUDE_DIRS=${ZLIB_INCLUDE_DIR}",
 				// "ZLIB_LIBRARY=${ZLIB_LIBRARY}",
 				// "ZLIB_ROOT=${ZLIB_ROOT}",
-				"USE_PTHREADS=1",
-				"DEPLOYMENT_TARGET=10.9"
 				// "CMAKE_TOOLCHAIN_FILE=$APOTHECARY_DIR/toolchains/ios.toolchain.cmake",
 				// -GXcode \
 
 			],
 			"defines[platform:macos]" : [
+				"DEPLOYMENT_TARGET=10.9",
 				"CMAKE_OSX_DEPLOYMENT_TARGET=10.9",
 				"CMAKE_OSX_ARCHITECTURES=x86_64;arm64"
 			]
