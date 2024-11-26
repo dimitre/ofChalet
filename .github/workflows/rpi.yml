@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 env: 
   CMAKE_CXX_COMPILER_LAUNCHER: ccache
-
+  cross: true
 
 jobs:
   rpi-build:
@@ -102,7 +102,7 @@ jobs:
     - name: Chalet Bundle
       shell: bash
       run: |
-        chalet bundle
+        chalet bundle -t ${{matrix.configuration.prefix}}
 
     - name: LS
       shell: bash
