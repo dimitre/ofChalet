@@ -13,14 +13,14 @@ jobs:
       matrix:
         configuration:
         # - { libs: armv6l, multistrap_arch: armhf, prefix: arm-linux-gnueabihf }
-        # - { libs: armv7l, multistrap_arch: armhf, prefix: arm-linux-gnueabihf }
+        - { libs: armv7l, multistrap_arch: armhf, prefix: arm-linux-gnueabihf }
         - { libs: aarch64, multistrap_arch: arm64, prefix: aarch64-linux-gnu }
     env:
-      CMAKE_SYSTEM_NAME: Linux
-      CMAKE_SYSTEM_PROCESSOR: ARM
+      # CMAKE_SYSTEM_NAME: Linux
+      # CMAKE_SYSTEM_PROCESSOR: ARM
       # TOOLCHAIN_PREFIX: ${{matrix.configuration.prefix}}
-      CMAKE_C_COMPILER: ${{matrix.configuration.prefix}}-gcc
-      CMAKE_ASM_COMPILER: ${{matrix.configuration.prefix}}-gcc
+      # CMAKE_C_COMPILER: ${{matrix.configuration.prefix}}-gcc
+      # CMAKE_ASM_COMPILER: ${{matrix.configuration.prefix}}-gcc
       CMAKE_CXX_COMPILER: ${{matrix.configuration.prefix}}-g++
       CMAKE_SYSROOT: ./raspbian
       MULTISTRAP_ARCH: ${{matrix.configuration.multistrap_arch}}
@@ -45,7 +45,7 @@ jobs:
     - name: Test
       shell: bash
       run: |
-        ${CMAKE_C_COMPILER} --version
+        # ${CMAKE_C_COMPILER} --version
         ${CMAKE_CXX_COMPILER} --version
 
 
@@ -61,7 +61,7 @@ jobs:
         mkdir -p raspbian/etc/apt/apt.conf.d/
         echo 'Acquire::AllowInsecureRepositories "true";' | sudo tee raspbian/etc/apt/apt.conf.d/90insecure
 
-        if [[ ${MULTISTRAP_ARCH} == "armhf" ]]; then
+        if [[ ${{matrix.configuration.multistrap_arch}} == "armhf" ]]; then
         git clone https://github.com/raspberrypi/userland --depth 1 raspbian/userland
         fi
 

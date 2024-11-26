@@ -3,6 +3,14 @@
 	"version": "0.0.3",
 
 	"externalDependencies": {
+
+		"zlib": {
+			"repository" : "https://github.com/madler/zlib",
+			"tag" : "v1.3.1",
+			"kind": "git"
+		},
+
+
 		"opencv" : {
 			"repository" : "https://github.com/opencv/opencv",
 			"tag" : "4.10.0",
@@ -99,6 +107,30 @@
 	// },
 
 	"targets": {
+		"zlib" : {
+			"kind": "cmakeProject",
+			"location": "${external:${name}}",
+			"recheck": false,
+			"rebuild": false,
+			"defines" : [
+				"CMAKE_INSTALL_PREFIX=Release",
+				"BUILD_SHARED_LIBS=OFF",
+				"ZLIB_BUILD_EXAMPLES=OFF",
+				"SKIP_EXAMPLE=ON",
+				"CMAKE_CXX_EXTENSIONS=OFF",
+				"CMAKE_INSTALL_INCLUDEDIR=include",
+				"CMAKE_INCLUDE_OUTPUT_DIRECTORY=include",
+				"ENABLE_BITCODE=OFF",
+				"ENABLE_ARC=OFF",
+				"CMAKE_POSITION_INDEPENDENT_CODE=TRUE",
+				"ENABLE_VISIBILITY=OFF"
+			],
+			"defines[platform:macos]" : [
+				"CMAKE_OSX_ARCHITECTURES=x86_64;arm64",
+				"CMAKE_OSX_DEPLOYMENT_TARGET=10.9"
+			]
+		},
+
 		"opencv": {
 			"kind": "cmakeProject",
 			"location": "${external:${name}}",
@@ -366,6 +398,10 @@
 			"recheck": false,
 			"rebuild": false,
 			"defines": [
+				"ZLIB_ROOT=${externalBuild:zlib}",
+				"ZLIB_LIBRARY=${externalBuild:zlib}",
+				"ZLIB_INCLUDE_DIRS=${externalBuild:zlib}",
+
 				"BUILD_JXR=OFF",
 				"BUILD_LIBPNG=OFF",
 				"BUILD_LIBRAWLITE=OFF",
@@ -382,8 +418,8 @@
 				// "CMAKE_CXX_FLAGS=-fPIC", // ${FLAG_RELEASE}
 				// "CMAKE_C_FLAGS=-fPIC",
 				// "CMAKE_C_STANDARD=${C_STANDARD}",
-				"CMAKE_INCLUDE_OUTPUT_DIRECTORY=include",
 				"CMAKE_INSTALL_INCLUDEDIR=include",
+				"CMAKE_INCLUDE_OUTPUT_DIRECTORY=include",
 				"CMAKE_INSTALL_PREFIX=Release",
 				"CMAKE_POSITION_INDEPENDENT_CODE=ON",
 				// "CMAKE_PREFIX_PATH=${LIBS_ROOT}",
@@ -522,8 +558,6 @@
 			]
 		},
 
-
-
 		"assimp": {
 			"kind": "archive",
 			// "condition": "[:macos]",
@@ -550,10 +584,18 @@
 			"condition": "[:macos]",
 			"format": "zip",
 			"include": [
-				// "${externalBuild:${name}}/libfreetype.a"
-				// "${externalBuild:${name}}/${ar:glm_static}"
-				"${externalBuild:${name}}/${ar:freetype}",
+				"${externalBuild:${name}}/${ar:${name}}",
 				"${external:${name}}/include"
+			]
+		},
+
+		"freeimage": {
+			"kind": "archive",
+			"condition": "[:macos]",
+			"format": "zip",
+			"include": [
+				"${externalBuild:${name}}/${ar:${name}}",
+				"${external:${name}}/Source/FreeImage.h"
 			]
 		},
 
