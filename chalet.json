@@ -400,7 +400,7 @@
 			"defines": [
 				"ZLIB_ROOT=${externalBuild:zlib}",
 				"ZLIB_LIBRARY=${externalBuild:zlib}",
-				"ZLIB_INCLUDE_DIRS=${externalBuild:zlib}",
+				"ZLIB_INCLUDE_DIRS=${external:zlib}",
 
 				"BUILD_JXR=OFF",
 				"BUILD_LIBPNG=OFF",
