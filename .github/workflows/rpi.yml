@@ -12,8 +12,8 @@ jobs:
     strategy:
       matrix:
         configuration:
-        - { libs: armv6l, multistrap_arch: armhf, prefix: arm-linux-gnueabihf }
-        - { libs: armv7l, multistrap_arch: armhf, prefix: arm-linux-gnueabihf }
+        # - { libs: armv6l, multistrap_arch: armhf, prefix: arm-linux-gnueabihf }
+        # - { libs: armv7l, multistrap_arch: armhf, prefix: arm-linux-gnueabihf }
         - { libs: aarch64, multistrap_arch: arm64, prefix: aarch64-linux-gnu }
     env:
       CMAKE_SYSTEM_NAME: Linux
