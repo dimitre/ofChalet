@@ -23,7 +23,7 @@ jobs:
       CMAKE_ASM_COMPILER: gcc-${TOOLCHAIN_PREFIX}
       CMAKE_CXX_COMPILER: g++-${TOOLCHAIN_PREFIX}
       CMAKE_SYSROOT: ./raspbian
-      MULTISTRAP_ARCH: ${{matrix.multistrap_arch}}
+      MULTISTRAP_ARCH: ${{matrix.configuration.multistrap_arch}}
     steps:
 
     - name: Cache Packages
@@ -42,7 +42,7 @@ jobs:
         git clone https://github.com/raspberrypi/userland --depth 1 raspbian/userland
         fi
 
-        multistrap -a ${MULTISTRAP_ARCH} -d ./raspbian -f ./multistrap.conf   
+        multistrap -a ${{matrix.configuration.multistrap_arch}} -d ./raspbian -f ./multistrap.conf   
 
 
 
