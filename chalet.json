@@ -105,6 +105,9 @@
 			"recheck": false,
 			"rebuild": false,
 			"defines": [
+				"CMAKE_CXX_COMPILER=${env:CMAKE_CXX_COMPILER}",
+				"CMAKE_C_COMPILER=${env:CMAKE_C_COMPILER}",
+
 				"BUILD_DOCS=OFF",
 				"BUILD_EXAMPLES=OFF",
 				"BUILD_TESTS=OFF",
