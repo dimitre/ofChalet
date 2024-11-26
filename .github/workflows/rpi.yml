@@ -18,10 +18,10 @@ jobs:
     env:
       CMAKE_SYSTEM_NAME: Linux
       CMAKE_SYSTEM_PROCESSOR: ARM
-      TOOLCHAIN_PREFIX: ${{matrix.configuration.suffix}}
-      CMAKE_C_COMPILER: gcc-${TOOLCHAIN_PREFIX}
-      CMAKE_ASM_COMPILER: gcc-${TOOLCHAIN_PREFIX}
-      CMAKE_CXX_COMPILER: g++-${TOOLCHAIN_PREFIX}
+      # TOOLCHAIN_PREFIX: ${{matrix.configuration.suffix}}
+      CMAKE_C_COMPILER: gcc-${{matrix.configuration.suffix}}
+      CMAKE_ASM_COMPILER: gcc-${{matrix.configuration.suffix}}
+      CMAKE_CXX_COMPILER: g++-${{matrix.configuration.suffix}}
       CMAKE_SYSROOT: ./raspbian
       MULTISTRAP_ARCH: ${{matrix.configuration.multistrap_arch}}
     steps:
@@ -31,6 +31,16 @@ jobs:
       with:
         packages: multistrap unzip gcc-${{matrix.configuration.suffix}} g++-${{matrix.configuration.suffix}}
         # version: 1.0
+
+
+    - name: Test
+      shell: bash
+      run: |
+        ${{matrix.configuration.suffix}}-gcc
+        ${{matrix.configuration.suffix}}-g++
+        gcc-${{matrix.configuration.suffix}}
+        g++-${{matrix.configuration.suffix}}
+
 
     - uses: actions/checkout@v4
     - name: ccache
