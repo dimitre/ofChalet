@@ -275,14 +275,18 @@
 			"rebuild": false,
 			"defines": [
 				// "ASSIMP_BUILD_FRAMEWORK=ON",
-				"ASSIMP_NO_EXPORT=YES",
-				"BUILD_SHARED_LIBS=OFF",
-				"ASSIMP_BUILD_TESTS=NO",
-				"ASSIMP_BUILD_SAMPLES=NO",
-				"ASSIMP_INSTALL=NO",
-				"ASSIMP_BUILD_3MF_IMPORTER=NO",
+				"ZLIB_ROOT=${externalBuild:zlib}",
+				"ZLIB_INCLUDE_DIR=${external:zlib}",
+				"ZLIB_LIBRARY=${externalBuild:zlib}/*.a",
+
+				"ASSIMP_NO_EXPORT=ON",
+				// "BUILD_SHARED_LIBS=OFF",
+				"ASSIMP_BUILD_TESTS=OFF",
+				"ASSIMP_BUILD_SAMPLES=OFF",
+				"ASSIMP_INSTALL=OFF",
+				"ASSIMP_BUILD_3MF_IMPORTER=OFF",
 				"ASSIMP_INJECT_DEBUG_POSTFIX=OFF",
-				"CMAKE_COMPILE_WARNING_AS_ERROR=NO"
+				"CMAKE_COMPILE_WARNING_AS_ERROR=OFF"
 				// "CMAKE_C_FLAGS=-O3 -DNDEBUG -funroll-loops -Werror -fPIC"
 			],
 			"defines[platform:macos]": [
