@@ -310,22 +310,22 @@
 			]
 		},
 
-		"libpng" : {
-			"kind": "cmakeProject",
-			"location": "${external:${name}}",
-			"recheck": false,
-			"rebuild": false,
-			"defines" : [
-				// temporary fix for neon issues in universal
-				// we can remove once this is fixed: https://github.com/pnggroup/libpng/issues/372
-				"PNG_ARM_NEON_OPT=0"
-				// "CMAKE_C_FLAGS=\"-DPNG_ARM_NEON_OPT=0\""
-			],
-			"defines[platform:macos]" : [
-				"CMAKE_OSX_DEPLOYMENT_TARGET=10.9",
-				"CMAKE_OSX_ARCHITECTURES=x86_64;arm64"
-			]
-		},
+		// "libpng" : {
+		// 	"kind": "cmakeProject",
+		// 	"location": "${external:${name}}",
+		// 	"recheck": false,
+		// 	"rebuild": false,
+		// 	"defines" : [
+		// 		// temporary fix for neon issues in universal
+		// 		// we can remove once this is fixed: https://github.com/pnggroup/libpng/issues/372
+		// 		"PNG_ARM_NEON_OPT=0"
+		// 		// "CMAKE_C_FLAGS=\"-DPNG_ARM_NEON_OPT=0\""
+		// 	],
+		// 	"defines[platform:macos]" : [
+		// 		"CMAKE_OSX_DEPLOYMENT_TARGET=10.9",
+		// 		"CMAKE_OSX_ARCHITECTURES=x86_64;arm64"
+		// 	]
+		// },
 
 		"libusb": {
 			"kind": "cmakeProject",
@@ -538,19 +538,20 @@
 				"${externalBuild:${name}}/${ar:freetype}",
 				"${external:${name}}/include"
 			]
-		}
-		,
-		"libpng": {
-			"kind": "archive",
-			"condition": "[:macos]",
-			"format": "zip",
-			"include": [
-				"${buildDir}/${ar:libpng}",
-				// "${externalBuild:${name}}/*.a",
-				// "${externalBuild:${name}}/${ar:glm_static}",
-				"${external:${name}}/*.h"
-			]
 		},
+
+		// voltar depois, precisa dependencia zlib
+		// "libpng": {
+		// 	"kind": "archive",
+		// 	"condition": "[:macos]",
+		// 	"format": "zip",
+		// 	"include": [
+		// 		"${buildDir}/${ar:libpng}",
+		// 		// "${externalBuild:${name}}/*.a",
+		// 		// "${externalBuild:${name}}/${ar:glm_static}",
+		// 		"${external:${name}}/*.h"
+		// 	]
+		// },
 
 		"libusb": {
 			"kind": "archive",

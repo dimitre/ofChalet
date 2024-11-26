@@ -12,13 +12,13 @@ jobs:
     strategy:
       matrix:
         include:
-        - { libs: armv6l, multistrap_arch: armhf, suffix: arm-linux-gnueabihf, alladdons: 1 }
-        - { libs: armv7l, multistrap_arch: armhf, suffix: arm-linux-gnueabihf, alladdons: 1 }
-        - { libs: aarch64, multistrap_arch: arm64, suffix: aarch64-linux-gnu, alladdons: 1 }
+        - { libs: armv6l, multistrap_arch: armhf, suffix: arm-linux-gnueabihf }
+        - { libs: armv7l, multistrap_arch: armhf, suffix: arm-linux-gnueabihf }
+        - { libs: aarch64, multistrap_arch: arm64, suffix: aarch64-linux-gnu }
     env:
       ARCH: ${{matrix.include.libs}}
-      MULTISTRAP_ARCH: ${{matrix.include.multistrap_arch}}
-      ALLADDONSEXAMPLE: ${{matrix.include.alladdons}}
+      MULTISTRAP_ARCH: ${{matrix.multistrap_arch}}
+      ALLADDONSEXAMPLE: ${{matrix.alladdons}}
     steps:
     - name: Cache Packages
       uses: awalsh128/cache-apt-pkgs-action@latest
