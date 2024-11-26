@@ -111,7 +111,7 @@ jobs:
     - name: Chalet Bundle
       shell: bash
       run: |
-        chalet bundle -t ${{matrix.configuration.prefix}}
+        chalet bundle -t ${CMAKE_C_COMPILER}
 
     - name: LS
       shell: bash
