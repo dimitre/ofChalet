@@ -19,7 +19,7 @@ jobs:
       # CMAKE_SYSTEM_NAME: Linux
       # CMAKE_SYSTEM_PROCESSOR: ARM
       # TOOLCHAIN_PREFIX: ${{matrix.configuration.prefix}}
-      # CMAKE_C_COMPILER: ${{matrix.configuration.prefix}}-gcc
+      TOOLCHAIN: ${{matrix.configuration.prefix}}-gcc
       # CMAKE_ASM_COMPILER: ${{matrix.configuration.prefix}}-gcc
       CMAKE_CXX_COMPILER: ${{matrix.configuration.prefix}}-g++
       CMAKE_SYSROOT: ./raspbian
@@ -111,7 +111,7 @@ jobs:
     - name: Chalet Bundle
       shell: bash
       run: |
-        chalet bundle -t ${CMAKE_C_COMPILER}
+        chalet bundle -t ${TOOLCHAIN}
 
     - name: LS
       shell: bash
