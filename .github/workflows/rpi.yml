@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
+        include:
         - { libs: armv6l, multistrap_arch: armhf, suffix: arm-linux-gnueabihf, alladdons: 1 }
         - { libs: armv7l, multistrap_arch: armhf, suffix: arm-linux-gnueabihf, alladdons: 1 }
         - { libs: aarch64, multistrap_arch: arm64, suffix: aarch64-linux-gnu, alladdons: 1 }
