@@ -211,7 +211,7 @@
 				"CMAKE_C_FLAGS=-fvisibility-inlines-hidden -O3 -fPIC"
 			],
 			"defines[platform:windows]" : [
-				"CPU_BASELINE="
+				"CPU_BASELINE=\"\""
 			],
 			"defines[platform:macos]" : [
 				"CPU_BASELINE=NATIVE",
