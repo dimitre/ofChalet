@@ -16,15 +16,15 @@ jobs:
         - { libs: armv7l, multistrap_arch: armhf, suffix: arm-linux-gnueabihf, alladdons: 1 }
         - { libs: aarch64, multistrap_arch: arm64, suffix: aarch64-linux-gnu, alladdons: 1 }
     env:
-      ARCH: ${{matrix.cfg.libs}}
-      MULTISTRAP_ARCH: ${{matrix.cfg.multistrap_arch}}
-      ALLADDONSEXAMPLE: ${{matrix.cfg.alladdons}}
+      ARCH: ${{matrix.include.libs}}
+      MULTISTRAP_ARCH: ${{matrix.include.multistrap_arch}}
+      ALLADDONSEXAMPLE: ${{matrix.include.alladdons}}
     steps:
     - name: Cache Packages
       uses: awalsh128/cache-apt-pkgs-action@latest
       with:
-        packages: multistrap unzip gcc-${{matrix.cfg.suffix}} g++-${{matrix.cfg.suffix}}
-        version: 1.0
+        packages: multistrap unzip gcc-${{matrix.include.suffix}} g++-${{matrix.include.suffix}}
+        # version: 1.0
     - uses: actions/checkout@v4
     - name: ccache
       uses: hendrikmuhs/ccache-action@v1.2.14

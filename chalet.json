@@ -130,6 +130,9 @@
 				// "BUILD_opencv_videoio=ON",
 				// "BUILD_opencv_videostab=ON", 
 				"BUILD_opencv_world=ON",
+				"WITH_ADE=OFF",
+				"WITH_OPENJPEG=OFF",
+				"WITH_TIFF=OFF",
 
 
 				// "ANDROID_EXAMPLES_WITH_LIBS=OFF",
@@ -148,7 +151,6 @@
 				// "HAVE_OPENCL=OFF",
 				// "INSTALL_PYTHON_EXAMPLES=OFF",
 				// "WITH_1394=OFF",
-				// "WITH_ADE=OFF",
 				// "WITH_AVFOUNDATION=OFF",
 				// "WITH_CARBON=OFF",
 				// "WITH_CLP=OFF",
@@ -195,7 +197,6 @@
 				// "WITH_QT=OFF",
 				// "WITH_QUICKTIME=OFF",
 				// "WITH_TBB=OFF",
-				// "WITH_TIFF=OFF",
 				// "WITH_UNICAP=OFF",
 				// "WITH_V4L=OFF",
 				// "WITH_VFW=OFF",
