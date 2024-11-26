@@ -16,10 +16,28 @@ jobs:
         - { libs: armv7l, multistrap_arch: armhf, suffix: arm-linux-gnueabihf }
         - { libs: aarch64, multistrap_arch: arm64, suffix: aarch64-linux-gnu }
     env:
-      ARCH: ${{matrix.configuration.libs}}
+      CMAKE_SYSTEM_NAME: Linux
+      CMAKE_SYSTEM_PROCESSOR: ARM
+      TOOLCHAIN_PREFIX: ${{matrix.configuration.suffix}}
+      CMAKE_C_COMPILER: gcc-${TOOLCHAIN_PREFIX}
+      CMAKE_ASM_COMPILER: gcc-${TOOLCHAIN_PREFIX}
+      CMAKE_CXX_COMPILER: g++-${TOOLCHAIN_PREFIX}
+      CMAKE_SYSROOT: ./raspbian
       MULTISTRAP_ARCH: ${{matrix.multistrap_arch}}
-      ALLADDONSEXAMPLE: ${{matrix.alladdons}}
     steps:
+
+    - name: Install Multistrap
+      run: |
+        mkdir -p raspbian/etc/apt/apt.conf.d/
+        echo 'Acquire::AllowInsecureRepositories "true";' | sudo tee raspbian/etc/apt/apt.conf.d/90insecure
+
+        if [ ${MULTISTRAP_ARCH} = "armhf" ]; then
+	        git clone https://github.com/raspberrypi/userland --depth 1 raspbian/userland
+        fi
+
+        multistrap -a ${MULTISTRAP_ARCH} -d raspbian -f multistrap.conf   
+
+
     - name: Cache Packages
       uses: awalsh128/cache-apt-pkgs-action@latest
       with:
