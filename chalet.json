@@ -240,7 +240,7 @@
 				"ASSIMP_BUILD_3MF_IMPORTER=NO",
 				"ASSIMP_INJECT_DEBUG_POSTFIX=OFF",
 				// "CMAKE_COMPILE_WARNING_AS_ERROR=NO",
-				"CMAKE_C_FLAGS=-O3 -DNDEBUG -funroll-loops -Werror -fPIC"
+				// "CMAKE_C_FLAGS=-O3 -DNDEBUG -funroll-loops -Werror -fPIC"
 			],
 			"defines[platform:macos]": [
 				"CMAKE_OSX_DEPLOYMENT_TARGET=10.9",
@@ -317,7 +317,8 @@
 			"defines" : [
 				// temporary fix for neon issues in universal
 				// we can remove once this is fixed: https://github.com/pnggroup/libpng/issues/372
-				"CMAKE_C_FLAGS=\"-DPNG_ARM_NEON_OPT=0\""
+				"PNG_ARM_NEON_OPT=0"
+				// "CMAKE_C_FLAGS=\"-DPNG_ARM_NEON_OPT=0\""
 			],
 			"defines[platform:macos]" : [
 				"CMAKE_OSX_DEPLOYMENT_TARGET=10.9",
@@ -361,8 +362,8 @@
 				
 				// "CMAKE_CXX_STANDARD=${CPP_STANDARD}",
 				// "CMAKE_CXX_STANDARD_REQUIRED=ON",
-				"CMAKE_CXX_FLAGS=-fPIC", // ${FLAG_RELEASE}
-				"CMAKE_C_FLAGS=-fPIC",
+				// "CMAKE_CXX_FLAGS=-fPIC", // ${FLAG_RELEASE}
+				// "CMAKE_C_FLAGS=-fPIC",
 				// "CMAKE_C_STANDARD=${C_STANDARD}",
 				"CMAKE_INCLUDE_OUTPUT_DIRECTORY=include",
 				"CMAKE_INSTALL_INCLUDEDIR=include",
@@ -442,7 +443,7 @@
 				"FMT_SYSTEM_HEADERS=OFF",
 				"CMAKE_INSTALL_INCLUDEDIR=include",
 				"CMAKE_INCLUDE_OUTPUT_DIRECTORY=include",
-				"CMAKE_C_FLAGS=-O3 -DNDEBUG -funroll-loops -Werror -fPIC"
+				// "CMAKE_C_FLAGS=-O3 -DNDEBUG -funroll-loops -Werror -fPIC"
 			],
 
 			"defines[platform:macos]" : [
