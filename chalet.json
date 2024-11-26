@@ -209,8 +209,8 @@
 				"OBSENSOR_USE_ORBBEC_SDK=NO",
 				
 				"CPU_BASELINE=NATIVE",
-				"CMAKE_CXX_FLAGS=-fvisibility-inlines-hidden -stdlib=libc++ -std=c++11 -O3 -fPIC -Wno-implicit-function-declaration",
-				"CMAKE_C_FLAGS=-fvisibility-inlines-hidden -stdlib=libc++ -O3 -fPIC -Wno-implicit-function-declaration"
+				"CMAKE_CXX_FLAGS=-fvisibility-inlines-hidden -O3 -fPIC",
+				"CMAKE_C_FLAGS=-fvisibility-inlines-hidden -O3 -fPIC"
 			],
 			"defines[platform:macos]" : [
 				"CMAKE_OSX_DEPLOYMENT_TARGET=10.9",
@@ -494,6 +494,8 @@
 				"${external:${name}}/include"
 			]
 		},
+
+
 
 		"assimp": {
 			"kind": "archive",

@@ -1,0 +1,87 @@
+name: Chalet Multiplatform
+
+on: [push, pull_request]
+
+env: 
+  CMAKE_CXX_COMPILER_LAUNCHER: ccache
+
+
+jobs:
+  rpi-build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        - { libs: armv6l, multistrap_arch: armhf, suffix: arm-linux-gnueabihf, alladdons: 1 }
+        - { libs: armv7l, multistrap_arch: armhf, suffix: arm-linux-gnueabihf, alladdons: 1 }
+        - { libs: aarch64, multistrap_arch: arm64, suffix: aarch64-linux-gnu, alladdons: 1 }
+    env:
+      ARCH: ${{matrix.cfg.libs}}
+      MULTISTRAP_ARCH: ${{matrix.cfg.multistrap_arch}}
+      ALLADDONSEXAMPLE: ${{matrix.cfg.alladdons}}
+    steps:
+    - name: Cache Packages
+      uses: awalsh128/cache-apt-pkgs-action@latest
+      with:
+        packages: multistrap unzip gcc-${{matrix.cfg.suffix}} g++-${{matrix.cfg.suffix}}
+        version: 1.0
+    - uses: actions/checkout@v4
+    - name: ccache
+      uses: hendrikmuhs/ccache-action@v1.2.14
+      with:
+        key: ${{ matrix.cfg.libs }}
+
+    - name: Install Chalet
+      uses: jaxxstorm/action-install-gh-release@v1.13.0
+      with: 
+        repo: chalet-org/chalet
+        cache: enable
+        extension: "\\.zip"
+        prerelease: "true"
+
+    - name: Get Path
+      run: |
+        echo $GITHUB_PATH
+
+    - name: Chalet Test / Version
+      run: |
+        chalet --version
+
+    - uses: actions/checkout@v4
+
+    - name: ccache
+      uses: hendrikmuhs/ccache-action@v1.2.14
+      with:
+        # key: ${{ matrix.os }}-ccache
+        key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('*.json') }}
+
+    - name: Install Ninja
+      uses: seanmiddleditch/gha-setup-ninja@master
+
+
+    - name: Cache Chalet
+      id: cache-chalet
+      uses: actions/cache@v4
+      with:
+        path: |
+          ./chalet_external/**
+          ./build/**
+        # key: ${ matrix.os }-chaletcache
+        key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('*.json') }}
+
+    - name: Chalet Bundle
+      shell: bash
+      run: |
+        chalet bundle
+
+    - name: LS
+      shell: bash
+      run: ls -alR
+
+    - name: Release
+      uses: softprops/action-gh-release@v2.0.8
+      if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
+      with:
+        files: ./dist/*.zip
+        token: ${{ secrets.GITHUB_TOKEN }}
+        draft: false
+        prerelease: false                
