@@ -34,11 +34,7 @@
       "kind": "archive",
       "condition": "[:macos]",
       "format": "zip",
-      "include": [
-        // "${externalBuild:${name}}/src/*.a",
-        "${externalBuild:${name}}**.a",
-        "${external:${name}}/include"
-      ]
+      "include": ["${externalBuild:${name}}**.a", "${external:${name}}/include"]
     }
   }
 }
