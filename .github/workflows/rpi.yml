@@ -41,7 +41,7 @@ jobs:
       - name: Cache Packages
         uses: awalsh128/cache-apt-pkgs-action@latest
         with:
-          packages:multistrap unzip gcc-${{matrix.configuration.prefix}} g++-${{matrix.configuration.prefix}}
+          packages: multistrap unzip gcc-${{matrix.configuration.prefix}} g++-${{matrix.configuration.prefix}}
           # version: 1.0
 
       - name: Test
