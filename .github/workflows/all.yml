@@ -2,7 +2,8 @@ name: ChaletTest
 # on: [push, pull_request]
 on:
   workflow_dispatch:
-env: 
+
+env:
   CMAKE_CXX_COMPILER_LAUNCHER: ccache
 
 jobs:
@@ -17,61 +18,58 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - name: ccache
-      uses: hendrikmuhs/ccache-action@v1.2.14
-      with:
-        # key: ${{ matrix.os }}-ccache
-        key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('*.json') }}
+      - name: ccache
+        uses: hendrikmuhs/ccache-action@v1.2.14
+        with:
+          # key: ${{ matrix.os }}-ccache
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('*.json') }}
 
-    - name: Install Ninja
-      shell: bash
-      run: brew install ninja
+      - name: Install Ninja
+        shell: bash
+        run: brew install ninja
 
-    - name: Install Chalet
-      shell: bash
-      run: |
-        brew tap chalet-org/chalet
-        # brew install --cask chalet
-        brew install --cask chalet@dev
-        chalet --version
+      - name: Install Chalet
+        shell: bash
+        run: |
+          brew tap chalet-org/chalet
+          # brew install --cask chalet
+          brew install --cask chalet@dev
+          chalet --version
 
-    - name: Cache Chalet
-      id: cache-chalet
-      uses: actions/cache@v4
-      with:
-        path: |
-          ./chalet_external/**
-          ./build/**
-          # chalet_external
-          # build
-        # key: ${ matrix.os }-chaletcache
-        key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('*.json') }}
+      - name: Cache Chalet
+        id: cache-chalet
+        uses: actions/cache@v4
+        with:
+          path: |
+            ./chalet_external/**
+            ./build/**
+            # chalet_external
+            # build
+          # key: ${ matrix.os }-chaletcache
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('*.json') }}
 
+      # - name: Cache projectGenerator folder
+      #   uses: actions/cache@v4
+      #   with:
+      #     path: '~/projectGenerator'
+      #     key: ${{ runner.os }}-pg-${{matrix.cfg.gradle_target}}
 
-    # - name: Cache projectGenerator folder
-    #   uses: actions/cache@v4
-    #   with:
-    #     path: '~/projectGenerator'
-    #     key: ${{ runner.os }}-pg-${{matrix.cfg.gradle_target}}        
+      - name: Chalet Bundle
+        shell: bash
+        run: |
+          chalet bundle
 
-    - name: Chalet Bundle
-      shell: bash
-      run: |
-        chalet bundle
+      - name: LS
+        shell: bash
+        run: ls -alFR
 
-
-
-    - name: LS
-      shell: bash
-      run: ls -alFR            
-
-    - name: Release
-      uses: softprops/action-gh-release@v2.0.8
-      if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
-      with:
-        files: ./dist/*.zip
-        token: ${{ secrets.GITHUB_TOKEN }}
-        draft: false
-        prerelease: false        
+      - name: Release
+        uses: softprops/action-gh-release@v2.0.8
+        if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
+        with:
+          files: ./dist/*.zip
+          token: ${{ secrets.GITHUB_TOKEN }}
+          draft: false
+          prerelease: false
