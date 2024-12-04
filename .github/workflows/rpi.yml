@@ -21,14 +21,16 @@ jobs:
           #   }
           - { libs: aarch64, multistrap_arch: arm64, prefix: aarch64-linux-gnu }
     env:
-      # CMAKE_SYSTEM_NAME: Linux
       # CMAKE_SYSTEM_PROCESSOR: ARM
       # TOOLCHAIN_PREFIX: ${{matrix.configuration.prefix}}
+      # CMAKE_TOOLCHAIN_FILE: # maybe a .cmake file with all the next definitions
+      CMAKE_SYSTEM_NAME: Linux
       CMAKE_SYSTEM_PROCESSOR: ${{matrix.configuration.libs}}
       CMAKE_FIND_ROOT_PATH: /usr/${{matrix.configuration.prefix}}
       TOOLCHAIN: ${{matrix.configuration.prefix}}-gcc
       # CMAKE_ASM_COMPILER: ${{matrix.configuration.prefix}}-gcc
       CMAKE_CXX_COMPILER: ${{matrix.configuration.prefix}}-g++
+      CMAKE_C_COMPILER: ${{matrix.configuration.prefix}}-gcc
       CMAKE_SYSROOT: ./raspbian
       MULTISTRAP_ARCH: ${{matrix.configuration.multistrap_arch}}
     steps:
@@ -50,7 +52,6 @@ jobs:
       - name: Test
         shell: bash
         run: |
-          # ${CMAKE_C_COMPILER} --version
           ${CMAKE_CXX_COMPILER} --version
 
       - uses: actions/checkout@v4
