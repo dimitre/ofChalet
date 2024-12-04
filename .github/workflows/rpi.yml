@@ -13,11 +13,11 @@ jobs:
       matrix:
         configuration:
           # - { libs: armv6l, multistrap_arch: armhf, prefix: arm-linux-gnueabihf }
-          - {
-              libs: armv7l,
-              multistrap_arch: armhf,
-              prefix: arm-linux-gnueabihf,
-            }
+          # - {
+          #     libs: armv7l,
+          #     multistrap_arch: armhf,
+          #     prefix: arm-linux-gnueabihf,
+          #   }
           - { libs: aarch64, multistrap_arch: arm64, prefix: aarch64-linux-gnu }
     env:
       # CMAKE_SYSTEM_NAME: Linux
@@ -41,7 +41,6 @@ jobs:
       - name: Cache Packages
         uses: awalsh128/cache-apt-pkgs-action@latest
         with:
-          # packages: libwayland-dev libxkbcommon-dev xorg-dev multistrap unzip gcc-${{matrix.configuration.prefix}} g++-${{matrix.configuration.prefix}}
           packages:multistrap unzip gcc-${{matrix.configuration.prefix}} g++-${{matrix.configuration.prefix}}
           # version: 1.0
 
