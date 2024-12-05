@@ -25,6 +25,7 @@ jobs:
       # CMAKE_SYSTEM_PROCESSOR: ARM
       # TOOLCHAIN_PREFIX: ${{matrix.configuration.prefix}}
       # CMAKE_TOOLCHAIN_FILE: # maybe a .cmake file with all the next definitions
+      CMAKE_CROSSCOMPILING: TRUE
       CMAKE_SYSTEM_NAME: Linux
       CMAKE_SYSTEM_PROCESSOR: ${{matrix.configuration.libs}}
       CMAKE_FIND_ROOT_PATH: /usr/${{matrix.configuration.prefix}}
@@ -80,9 +81,15 @@ jobs:
           fi
 
           multistrap -a ${{matrix.configuration.multistrap_arch}} -d ./raspbian -f ./multistrap.conf
+          # multistrap -a aarch64-linux-gnu -d ./raspbian -f ./multistrap.conf
+
+      - name: List Folders Raspbian
+        shell: bash
+        # run: ls -alR ./raspbian
+        run: find . -type d ./raspbian
 
       - name: Install Chalet
-        uses: jaxxstorm/action-install-gh-release@v1.13.0
+        uses: jaxxstorm/action-install-gh-release@v1.14.0
         with:
           repo: chalet-org/chalet
           cache: enable
