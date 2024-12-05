@@ -16,8 +16,8 @@
       "recheck": false,
       "rebuild": false,
       "defines": [
-        "GLFW_BUILD_WAYLAND=ON",
-        "GLFW_BUILD_X11=OFF",
+        // "GLFW_BUILD_WAYLAND=ON",
+        // "GLFW_BUILD_X11=OFF",
         "GLFW_BUILD_DOCS=OFF",
         "GLFW_BUILD_TESTS=OFF",
         "GLFW_BUILD_EXAMPLES=OFF",
