@@ -86,7 +86,7 @@ jobs:
       - name: List Folders Raspbian
         shell: bash
         # run: ls -alR ./raspbian
-        run: find . -type d ./raspbian
+        run: find ./raspbian -type d
 
       - name: Install Chalet
         uses: jaxxstorm/action-install-gh-release@v1.14.0
