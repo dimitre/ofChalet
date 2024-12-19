@@ -83,7 +83,9 @@ jobs:
 
       - name: List Folders Raspbian
         shell: bash
-        run: find ./raspbian -type d
+        run: |
+          ls -alFR raspbian/usr/include/X11
+          find ./raspbian -type d
 
       # - name: ccache
       #   uses: hendrikmuhs/ccache-action@v1.2.14
