@@ -37,6 +37,7 @@ jobs:
       X11_X11_INCLUDE_PATH: /home/runner/work/ofChalet/ofChalet/raspbian/usr/include/X11
       CMAKE_INCLUDE_PATH: /home/runner/work/ofChalet/ofChalet/raspbian/usr/include/X11
 
+      X11_X11_LIB:FILEPATH=/home/runner/work/ofChalet/ofChalet/raspbian/usr/include/X11
     steps:
       - name: Shell info
         shell: bash
@@ -81,10 +82,15 @@ jobs:
           multistrap -a ${{matrix.configuration.multistrap_arch}} -d ./raspbian -f ./multistrap.conf
           # multistrap -a aarch64-linux-gnu -d ./raspbian -f ./multistrap.conf
 
+      - name: LS
+        shell: bash
+        run: |
+          ls -alFR raspbian/usr/lib/X11
+          ls -alFR raspbian/usr/include/X11
+
       - name: List Folders Raspbian
         shell: bash
         run: |
-          ls -alFR raspbian/usr/include/X11
           find ./raspbian -type d
 
       # - name: ccache
