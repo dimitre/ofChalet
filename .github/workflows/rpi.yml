@@ -36,8 +36,8 @@ jobs:
       MULTISTRAP_ARCH: ${{matrix.configuration.multistrap_arch}}
       X11_X11_INCLUDE_PATH: /home/runner/work/ofChalet/ofChalet/raspbian/usr/include/X11
       CMAKE_INCLUDE_PATH: /home/runner/work/ofChalet/ofChalet/raspbian/usr/include/X11
+      # X11_X11_LIB:FILEPATH=/home/runner/work/ofChalet/ofChalet/raspbian/usr/include/X11
 
-      X11_X11_LIB:FILEPATH=/home/runner/work/ofChalet/ofChalet/raspbian/usr/include/X11
     steps:
       - name: Shell info
         shell: bash
