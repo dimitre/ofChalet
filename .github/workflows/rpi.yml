@@ -35,11 +35,14 @@ jobs:
       CMAKE_C_COMPILER: ${{matrix.configuration.prefix}}-gcc
       CMAKE_SYSROOT: ./raspbian
       MULTISTRAP_ARCH: ${{matrix.configuration.multistrap_arch}}
+      X11_X11_INCLUDE_PATH: ./raspbian/usr/lib/X11
+
     steps:
-      - name: cmake version
+      - name: Shell info
         shell: bash
         run: |
           cmake --version
+          pwd
 
       - name: Cache Multistrap
         id: cache-multistrap
@@ -82,16 +85,13 @@ jobs:
         shell: bash
         run: find ./raspbian -type d
 
-      - name: ccache
-        uses: hendrikmuhs/ccache-action@v1.2.14
-        with:
-          # key: ${{ matrix.os }}-ccache
-          # key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('*.json') }}
-          key: ${{ runner.os }}-${{ env.cache-name }}
-          # key: ${{ matrix.configuration.prefix }}
+      # - name: ccache
+      #   uses: hendrikmuhs/ccache-action@v1.2.14
+      #   with:
+      #     key: ${{ runner.os }}-${{ env.cache-name }}
 
-      - name: Install Ninja
-        uses: seanmiddleditch/gha-setup-ninja@master
+      # - name: Install Ninja
+      #   uses: seanmiddleditch/gha-setup-ninja@master
 
       - name: Install Chalet
         uses: jaxxstorm/action-install-gh-release@v1.14.0
