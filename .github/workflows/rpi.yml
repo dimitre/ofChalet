@@ -36,7 +36,7 @@ jobs:
       CMAKE_SYSROOT: ./raspbian
       MULTISTRAP_ARCH: ${{matrix.configuration.multistrap_arch}}
     steps:
-      - name: CMAKE Version
+      - name: cmake version
         shell: bash
         run: |
           cmake --version
@@ -53,27 +53,17 @@ jobs:
       - name: Cache Packages
         uses: awalsh128/cache-apt-pkgs-action@latest
         with:
-          packages: libx11-dev libwayland-dev libxkbcommon-dev xorg-dev multistrap unzip gcc-${{matrix.configuration.prefix}} g++-${{matrix.configuration.prefix}}
-
+          packages: multistrap gcc-${{matrix.configuration.prefix}} g++-${{matrix.configuration.prefix}}
+          # libx11-dev libwayland-dev libxkbcommon-dev xorg-dev
           #packages: multistrap unzip gcc-${{matrix.configuration.prefix}} g++-${{matrix.configuration.prefix}}
           # version: 1.0
 
-      - name: Test
+      - name: compiler version
         shell: bash
         run: |
           ${CMAKE_CXX_COMPILER} --version
 
       - uses: actions/checkout@v4
-
-      - name: ccache
-        uses: hendrikmuhs/ccache-action@v1.2.14
-        with:
-          # key: ${{ matrix.os }}-ccache
-          key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('*.json') }}
-          # key: ${{ matrix.configuration.prefix }}
-
-      - name: Install Ninja
-        uses: seanmiddleditch/gha-setup-ninja@master
 
       - name: Install Multistrap
         shell: bash
@@ -90,8 +80,17 @@ jobs:
 
       - name: List Folders Raspbian
         shell: bash
-        # run: ls -alR ./raspbian
         run: find ./raspbian -type d
+
+      - name: ccache
+        uses: hendrikmuhs/ccache-action@v1.2.14
+        with:
+          # key: ${{ matrix.os }}-ccache
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('*.json') }}
+          # key: ${{ matrix.configuration.prefix }}
+
+      - name: Install Ninja
+        uses: seanmiddleditch/gha-setup-ninja@master
 
       - name: Install Chalet
         uses: jaxxstorm/action-install-gh-release@v1.14.0
@@ -101,25 +100,25 @@ jobs:
           extension: "\\.zip"
           prerelease: "true"
 
-      - name: Get Path
-        shell: bash
-        run: |
-          echo $GITHUB_PATH
-
-      - name: Chalet Test / Version
+      - name: chalet version
         shell: bash
         run: |
           chalet --version
 
-      - name: Cache Chalet
-        id: cache-chalet
-        uses: actions/cache@v4
-        with:
-          path: |
-            ./chalet_external/**
-            ./build/**
-          # key: ${ matrix.os }-chaletcache
-          key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('*.json') }}
+      # - name: Cache Chalet
+      #   id: cache-chalet
+      #   uses: actions/cache@v4
+      #   with:
+      #     path: |
+      #       ./chalet_external/**
+      #       ./build/**
+      #     # key: ${ matrix.os }-chaletcache
+      #     key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('*.json') }}
+
+      - name: Get Path
+        shell: bash
+        run: |
+          echo $GITHUB_PATH
 
       - name: Chalet Bundle
         shell: bash
