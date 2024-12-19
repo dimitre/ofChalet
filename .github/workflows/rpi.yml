@@ -30,13 +30,12 @@ jobs:
       CMAKE_SYSTEM_PROCESSOR: ${{matrix.configuration.libs}}
       TOOLCHAIN: ${{matrix.configuration.prefix}}-gcc
       CMAKE_FIND_ROOT_PATH: /usr/${{matrix.configuration.prefix}};/home/runner/work/ofChalet/ofChalet/raspbian/
-      # CMAKE_ASM_COMPILER: ${{matrix.configuration.prefix}}-gcc
       CMAKE_CXX_COMPILER: ${{matrix.configuration.prefix}}-g++
       CMAKE_C_COMPILER: ${{matrix.configuration.prefix}}-gcc
       CMAKE_SYSROOT: /home/runner/work/ofChalet/ofChalet/raspbian
       MULTISTRAP_ARCH: ${{matrix.configuration.multistrap_arch}}
       X11_X11_INCLUDE_PATH: /home/runner/work/ofChalet/ofChalet/raspbian/usr/include/X11
-      CMAKE_SYSTEM_INCLUDE_PATH: /home/runner/work/ofChalet/ofChalet/raspbian/usr/include/X11
+      CMAKE_INCLUDE_PATH: /home/runner/work/ofChalet/ofChalet/raspbian/usr/include/X11
 
     steps:
       - name: Shell info
