@@ -36,6 +36,11 @@ jobs:
       CMAKE_SYSROOT: ./raspbian
       MULTISTRAP_ARCH: ${{matrix.configuration.multistrap_arch}}
     steps:
+      - name: CMAKE Version
+        shell: bash
+        run: |
+          cmake --version
+
       - name: Cache Multistrap
         id: cache-multistrap
         uses: actions/cache@v4
