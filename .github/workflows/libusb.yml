@@ -24,7 +24,7 @@ jobs:
     runs-on: ${{ matrix.cfg.os }}
     # defaults:
     # run:
-    # working-directory: ./freetype
+    # working-directory: ./${{ github.workflow }}
     steps:
       - uses: actions/checkout@v4
 
@@ -57,7 +57,7 @@ jobs:
       - name: Chalet Bundle
         shell: bash
         run: |
-          cd freetype
+          cd ${{ github.workflow }}
           chalet bundle
 
       - name: LS
@@ -67,11 +67,11 @@ jobs:
       - name: Rename
         shell: bash
         run: |
-          mv freetype/dist/freetype.zip oflib_${{ matrix.cfg.platform }}_${{ github.workflow }}.zip
+          mv ${{ github.workflow }}/dist/${{ github.workflow }}.zip oflib_${{ matrix.cfg.platform }}_${{ github.workflow }}.zip
           ls -alR
           ls -alF *.zip
-          # mv dist/freetype.zip dist/oflib_${{ github.ref_name }}_${{ matrix.cfg.platform }}.zip
-          # mv freetype/dist/*.zip ../..
+          # mv dist/${{ github.workflow }}.zip dist/oflib_${{ github.ref_name }}_${{ matrix.cfg.platform }}.zip
+          # mv ${{ github.workflow }}/dist/*.zip ../..
 
       - name: Release
         uses: softprops/action-gh-release@v2.1.0 #2.0.8 2.2.0
