@@ -38,13 +38,13 @@ jobs:
           extension: "\\.zip"
           prerelease: "true"
 
-      - name: Get Path
-        run: |
-          echo $GITHUB_PATH
-
       - name: Chalet Test / Version
         run: |
           chalet --version
+
+      - name: Get Path
+        run: |
+          echo $GITHUB_PATH
 
       - uses: actions/checkout@v4
 
@@ -52,7 +52,6 @@ jobs:
         uses: hendrikmuhs/ccache-action@v1.2.14
         with:
           key: ${{ runner.os }}-ccache
-          # key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('*.json') }}
 
       - name: Install Ninja
         uses: seanmiddleditch/gha-setup-ninja@master
@@ -71,6 +70,10 @@ jobs:
         shell: bash
         run: |
           chalet bundle
+
+      - name: LS
+        shell: bash
+        run: ls -alR
 
       - name: LS
         shell: bash
