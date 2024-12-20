@@ -25,7 +25,7 @@ targets:
 distribution:
   freetype:
     kind: archive
-    condition: "[:macos]"
+    # condition: "[:macos]"
     format: zip
     include:
       - ${externalBuild:${name}}**.a
