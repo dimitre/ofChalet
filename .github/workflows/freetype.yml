@@ -22,21 +22,21 @@ jobs:
           - { os: windows-latest, platform: vs }
 
     runs-on: ${{ matrix.cfg.os }}
-    defaults:
-      run:
-        working-directory: ./freetype
+    # defaults:
+    # run:
+    # working-directory: ./freetype
     steps:
       - uses: actions/checkout@v4
 
-      - name: echo os, platform
-        shell: bash
-        run: |
-          echo ${{ runner.os }} ${{ matrix.cfg.os }} ${{ matrix.cfg.platform }}
+      # - name: echo os, platform       # Linux, ubuntu-24.04 linux64
+      #   shell: bash
+      #   run: |
+      #     echo ${{ runner.os }} ${{ matrix.cfg.os }} ${{ matrix.cfg.platform }}
 
-      - name: ccache
-        uses: hendrikmuhs/ccache-action@v1.2.14
-        with:
-          key: ${{ runner.os }}-${{ matrix.cfg.platform }}-ccache
+      # - name: ccache
+      #   uses: hendrikmuhs/ccache-action@v1.2.14
+      #   with:
+      #     key: ${{ runner.os }}-${{ matrix.cfg.platform }}-ccache
 
       - name: Install Chalet
         uses: jaxxstorm/action-install-gh-release@v1.13.0
@@ -57,6 +57,7 @@ jobs:
       - name: Chalet Bundle
         shell: bash
         run: |
+          cd freetype
           chalet bundle
 
       - name: LS
@@ -67,14 +68,15 @@ jobs:
         shell: bash
         run: |
           # mv dist/freetype.zip dist/oflib_${{ github.ref_name }}_${{ matrix.cfg.platform }}.zip
-          mv dist/freetype.zip dist/oflib_${{ matrix.cfg.platform }}.zip
+          mv freetype/dist/freetype.zip freetype/dist/oflib_${{ matrix.cfg.platform }}.zip
+          mv freetype/dist/*.zip ../..
 
       - name: Release
         uses: softprops/action-gh-release@v2.2.0
         # if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
         if: github.event_name == 'push'
         with:
-          files: ./freetype/dist/*.zip
+          files: *.zip
           token: ${{ secrets.GITHUB_TOKEN }}
           draft: false
           prerelease: false
