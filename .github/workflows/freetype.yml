@@ -46,10 +46,10 @@ jobs:
         run: |
           echo $GITHUB_PATH
 
-      # - name: ccache
-      #   uses: hendrikmuhs/ccache-action@v1.2.14
-      #   with:
-      #     key: ${{ runner.os }}-${{ matrix.cfg.platform }}-ccache
+      - name: ccache
+        uses: hendrikmuhs/ccache-action@v1.2.14
+        with:
+          key: ${{ runner.os }}-${{ matrix.cfg.platform }}-ccache
 
       - name: Chalet Bundle
         shell: bash
