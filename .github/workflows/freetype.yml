@@ -70,6 +70,7 @@ jobs:
           # mv dist/freetype.zip dist/oflib_${{ github.ref_name }}_${{ matrix.cfg.platform }}.zip
           mv freetype/dist/freetype.zip freetype/dist/oflib_${{ matrix.cfg.platform }}.zip
           mv freetype/dist/*.zip ../..
+          ls -alF *.zip
 
       - name: Release
         uses: softprops/action-gh-release@v2.2.0
