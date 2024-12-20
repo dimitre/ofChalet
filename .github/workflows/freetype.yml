@@ -73,7 +73,7 @@ jobs:
         # if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
         if: github.event_name == 'push'
         with:
-          files: ./dist/*.zip
+          files: ./freetype/dist/*.zip
           token: ${{ secrets.GITHUB_TOKEN }}
           draft: false
           prerelease: false
