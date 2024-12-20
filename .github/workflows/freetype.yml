@@ -3,7 +3,8 @@ name: Freetype
 on:
   push:
     tags:
-      - "v*.*.*"
+      # - "v*.*.*"
+      - "*"
     # paths:
     #   - freetype/**
     #   - .github/workflows/freetype.yml
@@ -67,7 +68,7 @@ jobs:
       - name: Rename
         shell: bash
         run: |
-          mv freetype/dist/freetype.zip oflib_${{ matrix.cfg.platform }}.zip
+          mv freetype/dist/freetype.zip oflib_${{ matrix.cfg.platform }}_${{ github.workflow }}.zip
           ls -alR
           ls -alF *.zip
           # mv dist/freetype.zip dist/oflib_${{ github.ref_name }}_${{ matrix.cfg.platform }}.zip
