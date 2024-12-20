@@ -2,6 +2,8 @@ name: Freetype
 
 on:
   push:
+    tags:
+      - "*"
     paths:
       - freetype/**
 
