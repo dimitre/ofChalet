@@ -74,7 +74,7 @@ jobs:
           # mv freetype/dist/*.zip ../..
 
       - name: Release
-        uses: softprops/action-gh-release@v2.2.0
+        uses: softprops/action-gh-release@v2.0.8
         # if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
         if: github.event_name == 'push'
         with:
