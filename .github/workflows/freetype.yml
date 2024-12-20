@@ -82,4 +82,4 @@ jobs:
           files: ./*.zip
           token: ${{ secrets.GITHUB_TOKEN }}
           draft: false
-          prerelease: true
+          prerelease: false
