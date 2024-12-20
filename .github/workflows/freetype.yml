@@ -23,6 +23,8 @@ jobs:
       run:
         working-directory: ./freetype
     steps:
+      - uses: actions/checkout@v4
+
       - name: echo os, platform
         shell: bash
         run: |
@@ -71,5 +73,3 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           draft: false
           prerelease: false
-
-      # - uses: actions/checkout@v4
