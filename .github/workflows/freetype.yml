@@ -6,6 +6,7 @@ on:
     #   - "*"
     paths:
       - freetype/**
+      - .github/workflows/freetype.yml
 
 env:
   CMAKE_CXX_COMPILER_LAUNCHER: ccache
