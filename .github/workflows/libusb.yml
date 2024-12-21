@@ -16,7 +16,7 @@ jobs:
     strategy:
       matrix:
         cfg:
-          - { os: ubuntu-24.04, platform: linux64 }
+          #- { os: ubuntu-24.04, platform: linux64 }
           #- { os: ubuntu-24.04, platform: arm64 }
           - { os: macos-latest, platform: osx }
           - { os: windows-latest, platform: vs }
