@@ -1,12 +1,17 @@
 name: libusb
 
 on:
-  push:
-    # tags:
-    # - "*"
-    # paths:
-    # - ${{ github.workflow }}/**
-    # - .github/workflows/${{ github.workflow }}.yml
+  release:
+    types: [published]
+  # push:
+  # tags:
+  # - "*"
+  # paths:
+  # - ${{ github.workflow }}/**
+  # - .github/workflows/${{ github.workflow }}.yml
+
+permissions:
+  contents: write
 
 env:
   CMAKE_CXX_COMPILER_LAUNCHER: ccache
@@ -73,17 +78,24 @@ jobs:
           # mv dist/${{ github.workflow }}.zip dist/oflib_${{ github.ref_name }}_${{ matrix.cfg.platform }}.zip
           # mv ${{ github.workflow }}/dist/*.zip ../..
 
-      - name: Release
-        uses: "marvinpinto/action-automatic-releases@latest"
-        with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "latest"
-          prerelease: false
-          title: "Development Build"
-          files: |
-            ./*.zip
+          gh release upload ${{github.event.release.tag_name}} *.zip
+
+        env:
+          GITHUB_TOKEN: ${{ github.TOKEN }}
+
+      # apaga outros releases tambem.
+      # - name: Release
+      #   uses: "marvinpinto/action-automatic-releases@latest"
+      #   with:
+      #     repo_token: "${{ secrets.GITHUB_TOKEN }}"
+      #     automatic_release_tag: "latest"
+      #     prerelease: false
+      #     title: "Development Build"
+      #     files: |
+      #       ./*.zip
 
       # OK este funciona mas so deixa um tag por release, entao so entra uma library e as outras ficam de fora.
+      # https://github.com/ncipollo/release-action
       # - name: Release
       #   uses: ncipollo/release-action@v1.14.0
       #   with:
