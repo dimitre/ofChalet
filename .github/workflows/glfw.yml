@@ -33,6 +33,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: LS
+        shell: bash
+        run: ls -alF
       # - name: echo os, platform       # Linux, ubuntu-24.04 linux64
       #   shell: bash
       #   run: |
@@ -67,11 +70,12 @@ jobs:
 
       - name: LS
         shell: bash
-        run: ls -alR
+        run: ls -alF
 
       - name: Rename
         shell: bash
         run: |
+          rm -rf oflib_${{ matrix.cfg.platform }}_${{ github.workflow }}.zip
           mv ${{ github.workflow }}/dist/${{ github.workflow }}.zip oflib_${{ matrix.cfg.platform }}_${{ github.workflow }}.zip
           ls -alR
           ls -alF *.zip
