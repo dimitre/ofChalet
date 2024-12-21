@@ -8,12 +8,20 @@ Other than the natural complexity of a such large project things can be tidy the
 - like the specific defines for each platform. This way we decrease the number of lines to work.
 
 Apothecary actually clones compiles, packages, do a lot. Some of the repetitive work could be handed to some tool like Chalet, and concentrate in the right settings for each platform:
-Individual libraries could have its own individual .zip files in each release and platform, something like
+Individual libraries could have its own individual .zip files in each release and platform, something like:
 oflibs-osx-curl.zip
-ofApo002-windows-opencv.zip
+oflibs-windows-opencv.zip
+
 We can have an individual runner for each library and it takes in consideration if the folder was changed in latest push (possible in gh actions)
 there is a proof of concept running here, the only caveat is this action to release needs a tag, so it is not possible to consider only the folder.
 
+
+```tsv
+lib platform
+freetype  osx static  https://github.com/dimitre/ofChalet/releases/download/v1/oflib_osx_freetype.zip
+freetype  linux64 package libfreetype6-dev
+freetype  macos package freetype
+```
 
 
 
