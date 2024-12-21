@@ -2,13 +2,9 @@ name: freetype
 
 on:
   push:
-    tags:
-      # - "v*.*.*"
-      - "*"
-      # - "ZZZ"
-    # paths:
-    #   - freetype/**
-    #   - .github/workflows/freetype.yml
+    paths:
+      - freetype/**
+      - .github/workflows/freetype.yml
 
 env:
   CMAKE_CXX_COMPILER_LAUNCHER: ccache
@@ -66,21 +62,33 @@ jobs:
         shell: bash
         run: ls -alR
 
-      - name: Rename
+      - name: Rename and Publish Release
         shell: bash
         run: |
-          mv freetype/dist/freetype.zip oflib_${{ matrix.cfg.platform }}_${{ github.workflow }}.zip
+          rm -rf oflib_${{ matrix.cfg.platform }}_${{ github.workflow }}.zip
+          mv ${{ github.workflow }}/dist/${{ github.workflow }}.zip oflib_${{ matrix.cfg.platform }}_${{ github.workflow }}.zip
           ls -alR
           ls -alF *.zip
-          # mv dist/freetype.zip dist/oflib_${{ github.ref_name }}_${{ matrix.cfg.platform }}.zip
-          # mv freetype/dist/*.zip ../..
+          # mv dist/${{ github.workflow }}.zip dist/oflib_${{ github.ref_name }}_${{ matrix.cfg.platform }}.zip
+          # mv ${{ github.workflow }}/dist/*.zip ../..
 
-      - name: Release
-        uses: softprops/action-gh-release@v2.1.0
-        if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
-        # if: github.event_name == 'push'
-        with:
-          files: ./*.zip
-          token: ${{ secrets.GITHUB_TOKEN }}
-          draft: false
-          prerelease: false
+          gh release upload vx *.zip --clobber
+
+      # - name: Rename
+      #   shell: bash
+      #   run: |
+      #     mv freetype/dist/freetype.zip oflib_${{ matrix.cfg.platform }}_${{ github.workflow }}.zip
+      #     ls -alR
+      #     ls -alF *.zip
+      #     # mv dist/freetype.zip dist/oflib_${{ github.ref_name }}_${{ matrix.cfg.platform }}.zip
+      #     # mv freetype/dist/*.zip ../..
+
+      # - name: Release
+      #   uses: softprops/action-gh-release@v2.1.0
+      #   if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
+      #   # if: github.event_name == 'push'
+      #   with:
+      #     files: ./*.zip
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     draft: false
+      #     prerelease: false

@@ -78,7 +78,7 @@ jobs:
           # mv dist/${{ github.workflow }}.zip dist/oflib_${{ github.ref_name }}_${{ matrix.cfg.platform }}.zip
           # mv ${{ github.workflow }}/dist/*.zip ../..
 
-          gh release upload vx *.zip
+          gh release upload vx *.zip --clobber
 
         env:
           GITHUB_TOKEN: ${{ github.TOKEN }}
