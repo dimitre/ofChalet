@@ -74,11 +74,19 @@ jobs:
           # mv ${{ github.workflow }}/dist/*.zip ../..
 
       - name: Release
-        uses: softprops/action-gh-release@v2.1.0 #2.0.8 2.2.0
-        if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
-        # if: github.event_name == 'push'
+        uses: ncipollo/release-action@v1.14.0
         with:
-          files: ./*.zip
-          token: ${{ secrets.GITHUB_TOKEN }}
-          draft: false
-          prerelease: false
+          name: ofLibs
+          makeLatest: true
+          artifacts: ./*.zip
+          # bodyFile: "body.md"
+
+      # - name: Release
+      #   uses: softprops/action-gh-release@v2.1.0 #2.0.8 2.2.0
+      #   if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
+      #   # if: github.event_name == 'push'
+      #   with:
+      #     files: ./*.zip
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     draft: false
+      #     prerelease: false
