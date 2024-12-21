@@ -2,11 +2,11 @@ name: libusb
 
 on:
   push:
-    tags:
-      - "*"
-    # paths:
-    #   - ${{ github.workflow }}/**
-    #   - .github/workflows/${{ github.workflow }}.yml
+    # tags:
+    # - "*"
+    paths:
+      - ${{ github.workflow }}/**
+      - .github/workflows/${{ github.workflow }}.yml
 
 env:
   CMAKE_CXX_COMPILER_LAUNCHER: ccache
