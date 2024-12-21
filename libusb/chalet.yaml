@@ -29,7 +29,7 @@ distribution:
       - ${externalBuild:${name}}**.a
       - ${external:${name}}/libusb/libusb/*.h
     include[:windows]:
-      - ${externalBuild:${name}}**.dll
+      - ${externalBuild:${name}}**.lib
       - ${external:${name}}/libusb/libusb/*.h
       # - ${externalBuild:${name}}${ar:libusb}
       # - ${externalBuild:${name}}/${so:libusb}
