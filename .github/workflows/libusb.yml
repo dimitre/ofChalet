@@ -7,8 +7,8 @@ on:
     # tags:
     # - "*"
     paths:
-      - ${{ github.workflow }}/**
-      - .github/workflows/${{ github.workflow }}.yml
+      - libusb/**
+      - .github/workflows/libusb.yml
 
 permissions:
   contents: write
