@@ -1,0 +1,7 @@
+build/**
+chalet_external/**
+dist/**
+**/build/**
+**/dist/**
+.chaletrc
+**/.chaletrc
