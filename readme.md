@@ -15,7 +15,8 @@ oflibs-windows-opencv.zip
 We can have an individual runner for each library and it takes in consideration if the folder was changed in latest push (possible in gh actions)
 there is a proof of concept running here, the only caveat is this action to release needs a tag, so it is not possible to consider only the folder.
 
-
+Another idea, we can keep a TSV with all libraries for all platforms, one per line, indicating if it is a download or uses a package manager, so this is a good way of choosing how custom the libraries will be.
+example:
 | lib      | platform | kind    | data                   | comment |
 |----------|----------|---------|------------------------|---------|
 | freetype | osx      | static  | oflib_osx_freetype.zip |         |
@@ -33,8 +34,6 @@ freetype, macos, package, freetype
 
 
 etc
-
-
 
 Libraries
 
