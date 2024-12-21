@@ -77,6 +77,7 @@ jobs:
         uses: ncipollo/release-action@v1.14.0
         with:
           name: ofLibs
+          tag: v1.0
           makeLatest: true
           artifacts: ./*.zip
           # bodyFile: "body.md"
