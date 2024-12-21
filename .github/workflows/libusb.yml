@@ -72,13 +72,13 @@ jobs:
       - name: Rename
         shell: bash
         run: |
-          mv ${{ github.workflow }}/dist/${{ github.workflow }}.zip oflib_${{ matrix.cfg.platform }}_${{ github.workflow }}.zip
+          mv ${{ github.workflow }}/dist/${{ github.workflow }}.zip oflib_${{ matrix.cfg.platform }}_${{ github.workflow }}_arwil.zip
           ls -alR
           ls -alF *.zip
           # mv dist/${{ github.workflow }}.zip dist/oflib_${{ github.ref_name }}_${{ matrix.cfg.platform }}.zip
           # mv ${{ github.workflow }}/dist/*.zip ../..
 
-          gh release upload ${{github.event.release.tag_name}} *.zip
+          gh release upload vx *.zip
 
         env:
           GITHUB_TOKEN: ${{ github.TOKEN }}
