@@ -1,14 +1,14 @@
 name: libusb
 
 on:
-  release:
-    types: [published]
-  # push:
-  # tags:
-  # - "*"
-  # paths:
-  # - ${{ github.workflow }}/**
-  # - .github/workflows/${{ github.workflow }}.yml
+  # release:
+  # types: [published]
+  push:
+    # tags:
+    # - "*"
+    paths:
+      - ${{ github.workflow }}/**
+      - .github/workflows/${{ github.workflow }}.yml
 
 permissions:
   contents: write
