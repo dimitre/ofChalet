@@ -16,8 +16,15 @@ We can have an individual runner for each library and it takes in consideration 
 there is a proof of concept running here, the only caveat is this action to release needs a tag, so it is not possible to consider only the folder.
 
 
+| lib      | platform | kind    | data                   | comment |
+|----------|----------|---------|------------------------|---------|
+| freetype | osx      | static  | oflib_osx_freetype.zip |         |
+| freetype | linux64  | package | libfreetype6-dev       |         |
+| freetype | macos    | package | freetype               |         |
+
+
 ```csv
-lib platform
+lib,platform
 freetype, osx, static, oflib_osx_freetype.zip
 freetype, linux64, package, libfreetype6-dev
 freetype, macos, package, freetype
