@@ -58,9 +58,9 @@ jobs:
           extension: "\\.zip"
           prerelease: "true"
 
-      # - name: Chalet Test / Version
-      #   run: |
-      #     chalet --version
+      - name: Chalet Test / Version
+        run: |
+          chalet --version
 
       - name: Get Path
         run: |
@@ -79,9 +79,6 @@ jobs:
         run: |
           rm -rf oflib_${{ matrix.cfg.platform }}_${{ github.workflow }}.zip
           mv ${{ github.workflow }}/dist/${{ github.workflow }}.zip oflib_${{ matrix.cfg.platform }}_${{ github.workflow }}.zip
-          ls -alR
           ls -alF *.zip
-          # mv dist/${{ github.workflow }}.zip dist/oflib_${{ github.ref_name }}_${{ matrix.cfg.platform }}.zip
-          # mv ${{ github.workflow }}/dist/*.zip ../..
 
           gh release upload vx *.zip --clobber
