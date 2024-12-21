@@ -42,7 +42,7 @@ jobs:
         if: runner.os == 'Linux'
         uses: awalsh128/cache-apt-pkgs-action@latest
         with:
-          packages: wget2
+          packages: wayland-devel
           version: 1.0
 
       - name: ccache
