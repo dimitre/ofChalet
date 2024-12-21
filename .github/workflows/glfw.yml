@@ -33,9 +33,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: LS
-        shell: bash
-        run: ls -alF
       # - name: echo os, platform       # Linux, ubuntu-24.04 linux64
       #   shell: bash
       #   run: |
@@ -54,9 +51,9 @@ jobs:
           extension: "\\.zip"
           prerelease: "true"
 
-      - name: Chalet Test / Version
-        run: |
-          chalet --version
+      # - name: Chalet Test / Version
+      #   run: |
+      #     chalet --version
 
       - name: Get Path
         run: |
@@ -68,12 +65,10 @@ jobs:
           cd ${{ github.workflow }}
           chalet bundle
 
-      - name: LS
-        shell: bash
-        run: ls -alF
-
       - name: Rename and Publish Release
         shell: bash
+        env:
+          GITHUB_TOKEN: ${{ github.TOKEN }}
         run: |
           rm -rf oflib_${{ matrix.cfg.platform }}_${{ github.workflow }}.zip
           mv ${{ github.workflow }}/dist/${{ github.workflow }}.zip oflib_${{ matrix.cfg.platform }}_${{ github.workflow }}.zip
@@ -83,38 +78,3 @@ jobs:
           # mv ${{ github.workflow }}/dist/*.zip ../..
 
           gh release upload vx *.zip --clobber
-
-        env:
-          GITHUB_TOKEN: ${{ github.TOKEN }}
-
-      # apaga outros releases tambem.
-      # - name: Release
-      #   uses: "marvinpinto/action-automatic-releases@latest"
-      #   with:
-      #     repo_token: "${{ secrets.GITHUB_TOKEN }}"
-      #     automatic_release_tag: "latest"
-      #     prerelease: false
-      #     title: "Development Build"
-      #     files: |
-      #       ./*.zip
-
-      # OK este funciona mas so deixa um tag por release, entao so entra uma library e as outras ficam de fora.
-      # https://github.com/ncipollo/release-action
-      # - name: Release
-      #   uses: ncipollo/release-action@v1.14.0
-      #   with:
-      #     name: ofLibs
-      #     tag: v1.0
-      #     makeLatest: true
-      #     artifacts: ./*.zip
-      #     # bodyFile: "body.md"
-
-      # - name: Release
-      #   uses: softprops/action-gh-release@v2.1.0 #2.0.8 2.2.0
-      #   if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
-      #   # if: github.event_name == 'push'
-      #   with:
-      #     files: ./*.zip
-      #     token: ${{ secrets.GITHUB_TOKEN }}
-      #     draft: false
-      #     prerelease: false

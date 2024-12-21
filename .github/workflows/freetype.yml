@@ -64,31 +64,14 @@ jobs:
 
       - name: Rename and Publish Release
         shell: bash
+        env:
+          GITHUB_TOKEN: ${{ github.TOKEN }}
         run: |
           rm -rf oflib_${{ matrix.cfg.platform }}_${{ github.workflow }}.zip
           mv ${{ github.workflow }}/dist/${{ github.workflow }}.zip oflib_${{ matrix.cfg.platform }}_${{ github.workflow }}.zip
-          ls -alR
+          # ls -alR
           ls -alF *.zip
           # mv dist/${{ github.workflow }}.zip dist/oflib_${{ github.ref_name }}_${{ matrix.cfg.platform }}.zip
           # mv ${{ github.workflow }}/dist/*.zip ../..
 
           gh release upload vx *.zip --clobber
-
-      # - name: Rename
-      #   shell: bash
-      #   run: |
-      #     mv freetype/dist/freetype.zip oflib_${{ matrix.cfg.platform }}_${{ github.workflow }}.zip
-      #     ls -alR
-      #     ls -alF *.zip
-      #     # mv dist/freetype.zip dist/oflib_${{ github.ref_name }}_${{ matrix.cfg.platform }}.zip
-      #     # mv freetype/dist/*.zip ../..
-
-      # - name: Release
-      #   uses: softprops/action-gh-release@v2.1.0
-      #   if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
-      #   # if: github.event_name == 'push'
-      #   with:
-      #     files: ./*.zip
-      #     token: ${{ secrets.GITHUB_TOKEN }}
-      #     draft: false
-      #     prerelease: false
