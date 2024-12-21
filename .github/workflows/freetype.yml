@@ -4,7 +4,8 @@ on:
   push:
     tags:
       # - "v*.*.*"
-      - "*"
+      # - "*"
+      - "ZZZ"
     # paths:
     #   - freetype/**
     #   - .github/workflows/freetype.yml
