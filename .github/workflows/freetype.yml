@@ -40,7 +40,7 @@ jobs:
           key: ${{ runner.os }}-${{ matrix.cfg.platform }}-ccache
 
       - name: Install Chalet
-        uses: jaxxstorm/action-install-gh-release@v1.13.0
+        uses: jaxxstorm/action-install-gh-release@v1.14.0
         with:
           repo: chalet-org/chalet
           cache: enable
@@ -75,7 +75,7 @@ jobs:
           # mv freetype/dist/*.zip ../..
 
       - name: Release
-        uses: softprops/action-gh-release@v2.0.8
+        uses: softprops/action-gh-release@v2.1.0
         if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
         # if: github.event_name == 'push'
         with:
