@@ -42,7 +42,7 @@ jobs:
         if: runner.os == 'Linux'
         uses: awalsh128/cache-apt-pkgs-action@latest
         with:
-          packages: libwayland-dev libxkbcommon-dev
+          packages: libwayland-dev libxkbcommon-dev libx11-dev
           version: 1.0
 
       - name: ccache
