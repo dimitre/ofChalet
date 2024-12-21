@@ -28,5 +28,8 @@ distribution:
     # condition: "[:macos]"
     format: zip
     include:
-      - ${externalBuild:${name}}**.a
       - ${external:${name}}/include
+    include[:macos]:
+      - ${externalBuild:${name}}**.a
+    include[:windows]:
+      - ${externalBuild:${name}}**.lib

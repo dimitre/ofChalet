@@ -25,12 +25,13 @@ distribution:
     kind: archive
     # condition: "[:macos]"
     format: zip
+    include:
+      - ${external:${name}}/libusb/libusb/*.h
     include[:macos]:
       - ${externalBuild:${name}}**.a
-      - ${external:${name}}/libusb/libusb/*.h
     include[:windows]:
       - ${externalBuild:${name}}**.lib
-      - ${external:${name}}/libusb/libusb/*.h
+
       # - ${externalBuild:${name}}${ar:libusb}
       # - ${externalBuild:${name}}/${so:libusb}
       # - ${so:${name}}
